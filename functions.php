@@ -128,7 +128,7 @@ TWITTER;
     foreach ($tweet['entities']['user_mentions'] as $user_mention) {
         $text = str_replace(
             '@'.$user_mention['screen_name'],
-            sprintf('<a href="%s" target="_blank">@%s</a>',
+            sprintf('<a href="%s">@%s</a>',
                 'https://twitter.com/'.$user_mention['screen_name'],
                 $user_mention['screen_name']
             ),
@@ -139,7 +139,7 @@ TWITTER;
     foreach ($tweet['entities']['urls'] as $url) {
         $text = str_replace(
             $url, sprintf(
-                '<a href="%s" target="_blank">%s</a>',
+                '<a href="%s">%s</a>',
                 $url['url'],
                 $url['url']
             ),
@@ -148,7 +148,7 @@ TWITTER;
     }
 
     $read_more = sprintf(
-        '<a class="read-more" href="https://twitter.com/%s/status/%s" target="_blank">%s</a>',
+        '<a class="read-more" href="https://twitter.com/%s/status/%s">%s</a>',
         $twitter_user,
         $tweet['id_str'],
         '<i class=" fas fa-external-link-alt"></i>'
