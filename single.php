@@ -9,7 +9,6 @@
 get_header();
 ?>
 
-
     <div class="row">
         <?php get_sidebar(); ?>
 

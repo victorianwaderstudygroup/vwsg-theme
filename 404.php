@@ -9,14 +9,11 @@
 get_header();
 ?>
 
-
     <div class="row">
-        <?php get_sidebar(); ?>
-
-        <div class="col-xs-12 col-md-9 main">
-            <?php get_breadcrumb(); ?>
+        <div class="col-xs-12 col-md-9 col-md-offset-3 main">
 
             <div class="content">
+                <h1>Not found</h1>
                 <?php
                 if (have_posts()) :
                     while (have_posts()) : the_post(); ?>

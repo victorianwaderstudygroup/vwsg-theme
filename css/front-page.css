@@ -1,0 +1,118 @@
+.banner {
+    left: 0;
+    width: 1170px;
+}
+
+.features {
+    margin-top: 2px;
+}
+
+.feature {
+    background: #d4d1cd;
+    padding: 0 25px 0 15px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
+    text-transform: lowercase;
+    font-size: 18px;
+    position: relative;
+    display: block;
+    color: #262626;
+}
+
+.feature:hover {
+    color: #ededed;
+    background: #464644;
+}
+
+.features a {
+    color: inherit;
+}
+
+.feature span {
+    display: inline-block;
+    padding-left: 100px;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.feature-img {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+}
+
+.feature + .feature {
+    border-left: 2px solid #ededed;
+}
+
+.home h1 {
+    margin-top: 1.2em;
+}
+
+.main {
+    padding-bottom: 8em;
+}
+
+.whats-on {
+    background: #e2dfdb;
+    border-left: 2px solid #ededed;
+    border-top: 2px solid #ededed;
+    margin-top: 1.5em;
+    padding-top: 4em;
+    padding-bottom: 2em;
+}
+
+.whats-on h2 {
+    text-align: center;
+    margin: 0 0 1em;
+    background: #d4d1cd;
+    color: #262626;
+    position: absolute;
+    padding: 0.5em 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-size: 26px;
+}
+
+.whats-on h3 {
+    font-size: 15px;
+    color: #444;
+    padding: 0 15px;
+    line-height: 1.2;
+    margin-top: 1.2em;
+    margin-bottom: 0;
+}
+
+.whats-on h3 a {
+    color: inherit;
+    display: block;
+    overflow: auto;
+    margin-left: -15px;
+    padding-top: 4px;
+}
+
+.news_item .date {
+    font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
+    font-size: 15px;
+    text-transform: lowercase;
+    display: inline-block;
+    line-height: 1.1;
+    width: 55px;
+    margin: -4px 0 0 0;
+    text-align: center;
+    background: #e8e8e8;
+    padding: 8px 0 7px;
+    border-radius: 5px;
+}
+
+.whats-on .title {
+    display: inline-block;
+}
+
+.whats-on a:hover .date {
+    background: #464644;
+    color: #ededed;
+}

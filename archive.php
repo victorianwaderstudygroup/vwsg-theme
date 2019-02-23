@@ -7,6 +7,9 @@
  */
 
 get_header();
+/**
+ * This is the post listing template (News & Events)
+ */
 ?>
 
 
@@ -16,13 +19,13 @@ get_header();
         <div class="col-xs-12 col-md-9 main">
             <?php get_breadcrumb(); ?>
 
-            <div class="content">
+            <div class="content news_listing">
+                <h1><?=get_query_var('year')?> News &amp; Events</h1>
                 <?php
                 if (have_posts()) :
-                    while (have_posts()) : the_post(); ?>
-                        <h1><?php the_title() ?></h1>
-                        <?php
-                        the_content();
+                    while (have_posts()) :
+                        the_post();
+                        get_template_part('partial/news-item');
                     endwhile;
                 endif;
                 ?>

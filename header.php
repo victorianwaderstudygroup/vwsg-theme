@@ -28,12 +28,14 @@
                 <img class="navbar-logo" src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="<?= bloginfo('site_title') ?>">
             </a>
 
-            <?php wp_nav_menu([
-                'theme_location' => 'top-menu',
+            <?php wp_page_menu([
                 'container_id' => 'top-menu',
-                'container_class' => 'navbar-collapse collapse',
-                'menu_class' => 'nav navbar-nav',
-                'menu_id' => ''
+                'container_class' => '',
+                'menu_class' => 'navbar-collapse collapse',
+                'menu_id' => 'top-menu',
+                'before' => '<ul class="nav navbar-nav">',
+                'depth' => 1,
+                'exclude' => '34'
             ]); ?>
         </div>
         <div class="navbar-right">
