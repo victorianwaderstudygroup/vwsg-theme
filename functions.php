@@ -49,7 +49,7 @@ function vwsg_setup()
 {
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
     add_theme_support('title-tag');
-
+    add_theme_support('post-thumbnails');
     register_nav_menu('top-menu', __('Top Menu'));
 }
 
@@ -61,6 +61,12 @@ add_filter('the_generator', function () {
     return '';
 });
 remove_action('wp_head', 'wp_generator');
+
+function add_categories_for_pages() {
+    register_taxonomy_for_object_type('category', 'page');
+}
+
+add_action('init', 'add_categories_for_pages');
 
 // Enable categories for attachments
 function add_categories_for_attachments()

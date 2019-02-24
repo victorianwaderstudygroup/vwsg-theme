@@ -17,18 +17,39 @@ get_header();
     </div>
 
     <div class="row features">
-        <a class="col-xs-12 col-sm-6 col-md-4 feature" href="">
-            <img src="<?= get_template_directory_uri() ?>/images/oystercatcher-sightings.png" class="feature-img">
+        <?php
+        $i = 0;
+        $args = [
+            'category' => 6,
+            'numberposts' => 3,
+            'post_type' => 'page',
+            'orderby' => 'menu_order',
+            'order' => 'asc'
+        ];
+        foreach (get_posts($args) as $post) : setup_postdata($post); ?>
+            <a class="col-xs-12 col-sm-6 col-md-4 feature" href="<?=the_permalink()?>">
+            <?php if (has_post_thumbnail()) : ?>
+                <img src="<?=the_post_thumbnail_url('75');?>" class="feature-img">
+            <?php
+            endif;
+            ?>
+                <span><?=the_title();?></span></a>
+            <?php
+        endforeach;
+        wp_reset_postdata();
+    ?>
+        <!--<a class="col-xs-12 col-sm-6 col-md-4 feature" href="">
+            <img src="<?/*= get_template_directory_uri() */?>/images/oystercatcher-sightings.png" class="feature-img">
             <span>
                 Report Oystercatcher Band Sightings
             </span>
-        </a>
-        <a class="col-xs-12 col-sm-6 col-md-4 feature" href="">
-            <img src="<?= get_template_directory_uri() ?>/images/wader-gallery.png" class="feature-img">
+        </a>-->
+        <!--<a class="col-xs-12 col-sm-6 col-md-4 feature" href="">
+            <img src="<?/*= get_template_directory_uri() */?>/images/wader-gallery.png" class="feature-img">
             <span>
                 Wader Gallery
             </span>
-        </a>
+        </a>-->
         <a class="col-xs-12 col-sm-6 col-md-4 feature" href="">
             <img src="<?= get_template_directory_uri() ?>/images/flag-sightings.png" class="feature-img">
             <span>
