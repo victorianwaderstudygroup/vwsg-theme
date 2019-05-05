@@ -35,6 +35,5 @@ curl_setopt_array($ch, [
 ]);
 
 $response = curl_exec($ch);
-print_r($response);
 
 file_put_contents(TWITTER_USER.'.json', $response);

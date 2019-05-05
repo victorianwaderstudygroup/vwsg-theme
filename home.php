@@ -22,6 +22,23 @@ get_header();
             <div class="content news_listing">
                 <h1>News &amp; Events</h1>
                 <?php
+                    $post = get_post(305);
+                    setup_postdata($post); // Field work programme
+                ?>
+
+                <a href="<?= get_permalink(); ?>" class="tile">
+                    <?php if (has_post_thumbnail()) : ?>
+                        <img src="<?=the_post_thumbnail_url();?>" class="feature-img" alt="<?php the_title() ?>">
+                    <?php
+                    endif;
+                    ?>
+                    <span><?= the_title(); ?></span>
+                </a>
+                <?php
+                wp_reset_postdata();
+                ?>
+<br>
+                <?php
                 $post_args = [
                     'date_query' => [
                         'year' => date('Y')

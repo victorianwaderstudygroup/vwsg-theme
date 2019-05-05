@@ -243,27 +243,3 @@ footer .bulletin {
     display: inline-block;
     text-align: center;
 }
-
-.bulletins .bulletin img {
-    display: table-cell;
-    margin-right: 0.5em;
-    max-width: 60px;
-}
-
-.bulletins .bulletin {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #f8f8f8;
-    padding: 0.8em;
-    color: inherit;
-    display: table;
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: center;
-}
-
-.bulletins .bulletin span {
-    display: table-cell;
-    vertical-align: middle;
-}
-

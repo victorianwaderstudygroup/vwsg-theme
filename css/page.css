@@ -116,3 +116,32 @@ h1 {
 .sidebar .menu li li li a:visited {
     padding-left: 54px;
 }
+
+
+.tile {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f3f3f3;
+    padding: 0.8em;
+    color: inherit;
+    display: table;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.tile img {
+    display: table-cell;
+    margin-right: 0.5em;
+    max-width: 60px;
+}
+
+.tile span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+a.tile:link,
+a.tile a:visited {
+    color: #555;
+}

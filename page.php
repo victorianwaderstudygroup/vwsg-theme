@@ -6,6 +6,13 @@
  * Time: 11:57 AM
  */
 
+$meta = get_post_meta(get_the_id());
+
+if ($meta['redirect'][0]) {
+    header('Location: '.$meta['redirect'][0]);
+    exit;
+}
+
 get_header();
 ?>
 

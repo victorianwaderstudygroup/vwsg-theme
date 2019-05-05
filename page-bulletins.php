@@ -38,7 +38,7 @@ get_header();
                     setup_postdata($post);
                 ?>
                 <div class="col-md-3">
-                    <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="bulletin">
+                    <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile bulletin">
                         <img src="<?= wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title() ?>">
                         <span><?= nl2br(get_the_content(get_the_ID())); ?></span>
                     </a>
