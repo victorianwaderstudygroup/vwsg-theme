@@ -19,9 +19,11 @@ $ch = curl_init(
         'statuses/user_timeline.json',
         http_build_query([
             'screen_name' => TWITTER_USER,
-            'count' => 1,
+            'count' => 3,
             'exclude_replies' => true,
-            'trim_user' => true
+//            'include_rts' => false,
+            'trim_user' => true,
+            'tweet_mode' => 'extended'
         ])
     )
 );
@@ -35,5 +37,37 @@ curl_setopt_array($ch, [
 ]);
 
 $response = curl_exec($ch);
+curl_close($ch);
+
+/*$ids = [];
+$response = json_decode($response);
+
+foreach ($response as $tweet) {
+    $ids[] = $tweet->id;
+}
+
+$ch = curl_init(
+    sprintf(
+        '%s%s?%s',
+        TWITTER_API_URL,
+        'statuses/lookup.json',
+        http_build_query([
+            'id' => implode(',', $ids)
+        ])
+    )
+);
+
+curl_setopt_array($ch, [
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => [
+        sprintf('Authorization: Bearer %s', TWITTER_BEARER_TOKEN)
+    ]
+]);
+
+
+$response = curl_exec($ch);
+curl_close($ch);*/
+
 
 file_put_contents(TWITTER_USER.'.json', $response);

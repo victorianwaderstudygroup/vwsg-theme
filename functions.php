@@ -6,6 +6,8 @@ function vwsg_styles()
     wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
     wp_enqueue_style('fonts', 'https://fonts.googleapis.com/css?family=Julius+Sans+One|Open+Sans:300,400,700', []);
     wp_enqueue_style('bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', [], '3.3.7');
+    wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', [], '3.5.7');
+
     wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.0.0');
 
     if (is_front_page()) {
@@ -17,29 +19,24 @@ function vwsg_styles()
     }
 
     if (is_search()) {
-        wp_enqueue_style('vwsg-search-style', get_template_directory_uri(). '/css/search.css', ['vwsg-page-style'], '1.0.0');
+        wp_enqueue_style('vwsg-search-style', get_template_directory_uri() . '/css/search.css', ['vwsg-page-style'], '1.0.0');
     }
 
-    if (is_news())  {
-        wp_enqueue_style('vwsg-news-style', get_template_directory_uri(). '/css/news.css', ['vwsg-page-style'], '1.0.0');
+    if (is_news()) {
+        wp_enqueue_style('vwsg-news-style', get_template_directory_uri() . '/css/news.css', ['vwsg-page-style'], '1.0.0');
     }
-
 }
 
 
-
-
-
 add_action('wp_enqueue_scripts', 'vwsg_styles');
-
-
-
 
 // Enqueue scripts
 function vwsg_scripts()
 {
     wp_deregister_script('jquery');
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', [], '3.3.1');
+    wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
+    wp_enqueue_script('vwsg-search-script', get_template_directory_uri().'/js/search.js', ['jquery'], '1.0.0');
 }
 
 add_action('wp_enqueue_scripts', 'vwsg_scripts');
@@ -62,7 +59,16 @@ add_filter('the_generator', function () {
 });
 remove_action('wp_head', 'wp_generator');
 
-function add_categories_for_pages() {
+
+add_filter('pre_get_posts', function($query) {
+    if ($query->is_search === true) {
+        $query->set('post_type', ['post', 'page', 'attachment']);
+        $query->set('post_status', ['publish', 'inherit']);
+    }
+});
+
+function add_categories_for_pages()
+{
     register_taxonomy_for_object_type('category', 'page');
 }
 
@@ -85,19 +91,28 @@ function add_tags_for_attachments()
 
 add_action('init', 'add_tags_for_attachments');
 
+
+function wpdocs_excerpt_more() {
+    return '...';
+}
+add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
+
+
 /**
  * Is the current post a single post or a post listing.
  * In the context of this theme, is it news
  * @return bool
  */
-function is_news() {
+function is_news()
+{
     return is_single() || is_home() || is_archive();
 }
 
 /**
  * Vanity function to make calling breadcrumb like calling other template components
  */
-function get_breadcrumb() {
+function get_breadcrumb()
+{
     get_template_part('breadcrumb');
 }
 
@@ -107,35 +122,39 @@ function get_breadcrumb() {
  *
  * @return array|WP_Post|null
  */
-function get_news_page() {
+function get_news_page()
+{
     return get_post(17);
 }
 
-/**
- * Builds tweet from cached json result.
- * Expects cron/twitter.cron.php to be running
- */
-function display_tweet() {
+
+
+function build_tweet($tweet) {
     $twitter_user = 'vwsg_web';
 
     $template = <<<TWITTER
 <p class="tweet">
     %s %s
 </p>
-<p class="handle">
-    <a href="//twitter.com/%s">%s</a>
-</p>
+
 TWITTER;
 
+    $is_retweet = false;
+    if (array_key_exists('retweeted_status', $tweet)) {
+        $text = $tweet['retweeted_status']['full_text'];
+        $is_retweet = true;
+    } else {
 
-    $json = json_decode(file_get_contents(get_template_directory().'/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
-    $tweet = $json[0];
-    $text = $tweet['text'];
-    foreach ($tweet['entities']['user_mentions'] as $user_mention) {
+        $text = $tweet['full_text'];
+    }
+    foreach ($tweet['entities']['user_mentions'] as $i => $user_mention) {
+        if (0 == $i && $is_retweet) {
+            $text = 'RT @' . $user_mention['screen_name'] . ': ' . $text;
+        }
         $text = str_replace(
-            '@'.$user_mention['screen_name'],
+            '@' . $user_mention['screen_name'],
             sprintf('<a href="%s">@%s</a>',
-                'https://twitter.com/'.$user_mention['screen_name'],
+                'https://twitter.com/' . $user_mention['screen_name'],
                 $user_mention['screen_name']
             ),
             $text
@@ -144,14 +163,24 @@ TWITTER;
 
     foreach ($tweet['entities']['urls'] as $url) {
         $text = str_replace(
-            $url, sprintf(
+            $url['url'],
+            sprintf(
                 '<a href="%s">%s</a>',
-                $url['url'],
-                $url['url']
+                $url['expanded_url'],
+                $url['display_url']
             ),
             $text
         );
     }
+
+    if ($is_retweet) :
+        foreach ($tweet['retweeted_status']['entities']['media'] as $media) {
+            $text = str_replace(
+                $media, '',
+                $text
+            );
+        }
+    endif;
 
     $read_more = sprintf(
         '<a class="read-more" href="https://twitter.com/%s/status/%s">%s</a>',
@@ -161,13 +190,35 @@ TWITTER;
     );
 
 
-    echo sprintf(
+    return sprintf(
         $template,
         $text,
-        $read_more,
-        $twitter_user,
-        $twitter_user
+        $read_more
     );
+}
+
+/**
+ * Builds tweet from cached json result.
+ * Expects cron/twitter.cron.php to be running
+ */
+function display_tweet()
+{
+
+    $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
+    $tweet = $json[0];
+
+    echo build_tweet($tweet);
+
+}
+
+function display_tweets() {
+    $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
+
+
+    foreach ($json as $tweet) {
+
+        echo build_tweet($tweet);
+    }
 }
 
 class Breadcrumb_Walker extends Walker_Nav_Menu
@@ -207,7 +258,7 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         //$elements = $this->exclude_top_level_items($elements);
         $output = parent::walk($elements, $max_depth);
 
-        $output = '<a href="'.site_url().'" title="'.get_bloginfo('title').'">Home</a>'.$output;
+        $output = '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
         return $output;
     }
 
@@ -215,104 +266,104 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
     {
         // Don't link current page
         if ($item->object_id == get_the_ID()) {
-            $output .= ' &gt; '.$item->title;
+            $output .= ' &gt; ' . $item->title;
         } else {
 
-            $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+            $classes = empty($item->classes) ? array() : (array)$item->classes;
             $classes[] = 'menu-item-' . $item->ID;
 
             /**
              * Filters the arguments for a single nav menu item.
              *
+             * @param stdClass $args An object of wp_nav_menu() arguments.
+             * @param WP_Post $item Menu item data object.
+             * @param int $depth Depth of menu item. Used for padding.
              * @since 4.4.0
              *
-             * @param stdClass $args  An object of wp_nav_menu() arguments.
-             * @param WP_Post  $item  Menu item data object.
-             * @param int      $depth Depth of menu item. Used for padding.
              */
-            $args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
+            $args = apply_filters('nav_menu_item_args', $args, $item, $depth);
 
             /**
              * Filters the CSS class(es) applied to a menu item's list item element.
              *
+             * @param array $classes The CSS classes that are applied to the menu item's `<li>` element.
+             * @param WP_Post $item The current menu item.
+             * @param stdClass $args An object of wp_nav_menu() arguments.
+             * @param int $depth Depth of menu item. Used for padding.
              * @since 3.0.0
              * @since 4.1.0 The `$depth` parameter was added.
              *
-             * @param array    $classes The CSS classes that are applied to the menu item's `<li>` element.
-             * @param WP_Post  $item    The current menu item.
-             * @param stdClass $args    An object of wp_nav_menu() arguments.
-             * @param int      $depth   Depth of menu item. Used for padding.
              */
-            $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
-            $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+            $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
+            $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
             /**
              * Filters the ID applied to a menu item's list item element.
              *
+             * @param string $menu_id The ID that is applied to the menu item's `<li>` element.
+             * @param WP_Post $item The current menu item.
+             * @param stdClass $args An object of wp_nav_menu() arguments.
+             * @param int $depth Depth of menu item. Used for padding.
              * @since 3.0.1
              * @since 4.1.0 The `$depth` parameter was added.
              *
-             * @param string   $menu_id The ID that is applied to the menu item's `<li>` element.
-             * @param WP_Post  $item    The current menu item.
-             * @param stdClass $args    An object of wp_nav_menu() arguments.
-             * @param int      $depth   Depth of menu item. Used for padding.
              */
-            $id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
-            $id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+            $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
+            $id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
-            $output .= ' &gt; <a' . $id . $class_names .'';
+            $output .= ' &gt; <a' . $id . $class_names . '';
 
             $atts = array();
-            $atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
-            $atts['target'] = ! empty( $item->target )     ? $item->target     : '';
-            $atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
-            $atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+            $atts['title'] = !empty($item->attr_title) ? $item->attr_title : '';
+            $atts['target'] = !empty($item->target) ? $item->target : '';
+            $atts['rel'] = !empty($item->xfn) ? $item->xfn : '';
+            $atts['href'] = !empty($item->url) ? $item->url : '';
 
             /**
              * Filters the HTML attributes applied to a menu item's anchor element.
              *
-             * @since 3.6.0
-             * @since 4.1.0 The `$depth` parameter was added.
-             *
              * @param array $atts {
              *     The HTML attributes applied to the menu item's `<a>` element, empty strings are ignored.
              *
-             *     @type string $title  Title attribute.
-             *     @type string $target Target attribute.
-             *     @type string $rel    The rel attribute.
-             *     @type string $href   The href attribute.
+             * @type string $title Title attribute.
+             * @type string $target Target attribute.
+             * @type string $rel The rel attribute.
+             * @type string $href The href attribute.
              * }
-             * @param WP_Post  $item  The current menu item.
-             * @param stdClass $args  An object of wp_nav_menu() arguments.
-             * @param int      $depth Depth of menu item. Used for padding.
+             * @param WP_Post $item The current menu item.
+             * @param stdClass $args An object of wp_nav_menu() arguments.
+             * @param int $depth Depth of menu item. Used for padding.
+             * @since 3.6.0
+             * @since 4.1.0 The `$depth` parameter was added.
+             *
              */
-            $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+            $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
 
             $attributes = '';
-            foreach ( $atts as $attr => $value ) {
-                if ( ! empty( $value ) ) {
-                    $value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+            foreach ($atts as $attr => $value) {
+                if (!empty($value)) {
+                    $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
                     $attributes .= ' ' . $attr . '="' . $value . '"';
                 }
             }
 
             /** This filter is documented in wp-includes/post-template.php */
-            $title = apply_filters( 'the_title', $item->title, $item->ID );
+            $title = apply_filters('the_title', $item->title, $item->ID);
 
             /**
              * Filters a menu item's title.
              *
+             * @param string $title The menu item's title.
+             * @param WP_Post $item The current menu item.
+             * @param stdClass $args An object of wp_nav_menu() arguments.
+             * @param int $depth Depth of menu item. Used for padding.
              * @since 4.4.0
              *
-             * @param string   $title The menu item's title.
-             * @param WP_Post  $item  The current menu item.
-             * @param stdClass $args  An object of wp_nav_menu() arguments.
-             * @param int      $depth Depth of menu item. Used for padding.
              */
-            $title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+            $title = apply_filters('nav_menu_item_title', $title, $item, $args, $depth);
 
             $item_output = $args->before;
-            $item_output .= ''. $attributes .'>';
+            $item_output .= '' . $attributes . '>';
             $item_output .= $args->link_before . $title . $args->link_after;
             $item_output .= '</a>';
             $item_output .= $args->after;
@@ -324,14 +375,14 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
              * the menu item's title, the closing `</a>`, and `$args->after`. Currently, there is
              * no filter for modifying the opening and closing `<li>` for a menu item.
              *
+             * @param string $item_output The menu item's starting HTML output.
+             * @param WP_Post $item Menu item data object.
+             * @param int $depth Depth of menu item. Used for padding.
+             * @param stdClass $args An object of wp_nav_menu() arguments.
              * @since 3.0.0
              *
-             * @param string   $item_output The menu item's starting HTML output.
-             * @param WP_Post  $item        Menu item data object.
-             * @param int      $depth       Depth of menu item. Used for padding.
-             * @param stdClass $args        An object of wp_nav_menu() arguments.
              */
-            $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+            $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
         }
     }
 

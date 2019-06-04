@@ -141,7 +141,7 @@ h1 {
     vertical-align: middle;
 }
 
-a.tile:link,
-a.tile a:visited {
+.main a.tile:link,
+a.tile:visited {
     color: #555;
 }

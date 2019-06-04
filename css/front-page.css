@@ -21,6 +21,7 @@
     color: #262626;
 }
 
+
 .feature:hover {
     color: #ededed;
     background: #464644;
@@ -58,16 +59,18 @@
     padding-bottom: 8em;
 }
 
-.whats-on {
+.section {
     background: #e2dfdb;
     border-left: 2px solid #ededed;
     border-top: 2px solid #ededed;
     margin-top: 1.5em;
-    padding-top: 4em;
-    padding-bottom: 2em;
+    padding-top: 5em;
+    padding-bottom: 1em;
 }
 
-.whats-on h2 {
+.section h2 {
+    font-family: 'Julius Sans One', 'Open Sans', sans-serif;
+    text-transform: uppercase;
     text-align: center;
     margin: 0 0 1em;
     background: #d4d1cd;
@@ -80,7 +83,7 @@
     font-size: 26px;
 }
 
-.whats-on h3 {
+.section h3 {
     font-size: 15px;
     color: #444;
     padding: 0 15px;
@@ -89,7 +92,7 @@
     margin-bottom: 0;
 }
 
-.whats-on h3 a {
+.section h3 a {
     color: inherit;
     display: block;
     overflow: auto;
@@ -97,7 +100,7 @@
     padding-top: 4px;
 }
 
-.news_item .date {
+/*.news_item .date {
     font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
     font-size: 15px;
     text-transform: lowercase;
@@ -109,13 +112,35 @@
     background: #e8e8e8;
     padding: 8px 0 7px;
     border-radius: 5px;
-}
+}*/
 
-.whats-on .title {
+/*.section .title {
     display: inline-block;
-}
+}*/
 
-.whats-on a:hover .date {
+/*.section a:hover .date {
     background: #464644;
     color: #ededed;
+}*/
+
+.news h2 {
+    padding-top: 16px;
+}
+
+.news h2::before {
+    content: '\f1ea';
+    font-family: 'FontAwesome';
+    padding-right: 8px;
+    vertical-align: bottom;
+
+}
+
+.tweets h2::before {
+    content: '\f099';
+    font-family: 'FontAwesome';
+}
+
+.tweets .tweet a.read-more:link,
+.tweets .tweet a.read-more:visited {
+    color: #333;
 }
