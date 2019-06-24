@@ -28,10 +28,20 @@ if (count(get_pages(['child_of' => $parent_post->ID]))) {
                 $parent_post->post_title
             );
 
+            $query = new WP_Query([
+                'category_name' => 'fieldwork',
+                'post_type' => 'page'
+            ]);
+
+            $exclude = implode(',', array_column($query->posts, 'ID'));
+            wp_reset_postdata();
+
             wp_list_pages([
                 'child_of' => $parent_post->ID,
-                'title_li' => ''
+                'title_li' => '',
+                'exclude' => $exclude
             ]);
+
 
             ?>
         </ul>

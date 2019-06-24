@@ -37,6 +37,7 @@ function vwsg_scripts()
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', [], '3.3.1');
     wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
     wp_enqueue_script('vwsg-search-script', get_template_directory_uri().'/js/search.js', ['jquery'], '1.0.0');
+    wp_enqueue_script('vwsg-template-script', get_template_directory_uri().'/js/functions.js', ['jquery'], '1.0.0');
 }
 
 add_action('wp_enqueue_scripts', 'vwsg_scripts');
@@ -220,6 +221,42 @@ function display_tweets() {
         echo build_tweet($tweet);
     }
 }
+
+
+
+function list_fieldwork() {
+    $fieldwork_args = [
+        'post_type' => 'page',
+        'category_name' => 'Fieldwork',
+        'orderby' => 'name'
+    ];
+
+    ob_start();
+    $query = new WP_Query($fieldwork_args);
+    $count = 0;
+    if ($query->have_posts()) {
+        while($query->have_posts()) :
+            $query->the_post();
+            $count++; ?>
+                <div class="fieldwork-entry <?=$count == 1 ? 'open': ''?>">
+                    <header>
+                        <h3><?php the_title() ?></h3>
+                    </header>
+                    <div class="content">
+                        <?php the_content(); ?>
+                    </div>
+                </div>
+            <?php
+        endwhile;
+    }
+    wp_reset_postdata();
+    $content = ob_get_contents();
+    ob_end_clean();
+
+    return $content;
+}
+
+add_shortcode('fieldwork-listing', 'list_fieldwork');
 
 class Breadcrumb_Walker extends Walker_Nav_Menu
 {

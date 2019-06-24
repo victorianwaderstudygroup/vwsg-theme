@@ -145,3 +145,45 @@ h1 {
 a.tile:visited {
     color: #555;
 }
+
+.fieldwork-entry {
+    border: 1px solid #ddd;
+    margin-bottom: 1em;
+}
+
+.fieldwork-entry header {
+    background: #eee;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.fieldwork-entry.open header {
+    border-bottom: 1px solid #DDD;
+}
+
+.fieldwork-entry header::before {
+    content: '\f078';
+    font-size: 18px;
+    font-family: 'FontAwesome';
+    padding-right: 4px;
+    float: right;
+    vertical-align: top;
+    margin-top: -4px;
+}
+.fieldwork-entry.open header::before {
+    content: '\f077';
+}
+
+.fieldwork-entry header h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.fieldwork-entry .content {
+    display: none;
+    padding: 1em 15px;
+}
+
+.fieldwork-entry.open .content {
+    display: block;
+}
