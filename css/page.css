@@ -130,10 +130,14 @@ h1 {
     text-align: center;
 }
 
-.tile img {
+.bulletins .tile img {
     display: table-cell;
     margin-right: 0.5em;
     max-width: 60px;
+}
+
+.gallery .tile {
+    margin-bottom: 2em;
 }
 
 .tile span {

@@ -16,7 +16,7 @@ get_header();
         <div class="col-xs-12 col-md-9 main">
             <?php get_breadcrumb(); ?>
 
-            <div class="content bulletins">
+            <div class="content gallery">
                 <?php
                 if (have_posts()) :
                     while (have_posts()) : the_post(); ?>
@@ -30,18 +30,18 @@ get_header();
                 <?php
                 $bulletin_args = [
                     'post_type' => 'attachment',
-                    'category_name' => 'Bulletin',
+                    'category_name' => 'Gallery',
                     'orderby' => 'name',
-                    'posts_per_page' => 999
+                    'posts_per_page' => 16
                 ];
 
                 foreach (get_posts($bulletin_args) as $post):
                     setup_postdata($post);
                 ?>
                 <div class="col-md-3">
-                    <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile bulletin">
-                        <img src="<?= wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title() ?>">
-                        <span><?= nl2br(get_the_content(get_the_ID())); ?></span>
+                    <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile" data-fancybox="gallery" data-caption="<?=wp_get_attachment_caption(get_the_ID());?>">
+                        <img src="<?= wp_get_attachment_image_src(get_the_ID())[0]; ?>" alt="<?php the_title() ?>">
+                        <caption></caption>
                     </a>
                 </div>
                 <?php

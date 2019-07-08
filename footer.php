@@ -26,7 +26,7 @@
                         <?php endif; ?>
                             <div>
                     <?php
-                        endif ?><a data-fancybox="gallery" href="<?=wp_get_attachment_url(get_the_ID()) ?>"><img src="<?=wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title()?>"></a>
+                        endif ?><a data-fancybox="footer-gallery" href="<?=wp_get_attachment_url(get_the_ID()) ?>"><img src="<?=wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title()?>"></a>
                     <?php
                         $i++;
                     endforeach;
