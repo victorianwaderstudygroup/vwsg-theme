@@ -10,10 +10,10 @@
 <div class="col-xs-12 col-md-3 sidebar">
     <!-- Secondary nav -->
     <?php
-    if (is_news()) {
+    /*if (is_news()) {
         get_template_part('partial/sidebar/news');
     } else {
-        get_template_part('partial/sidebar/page');
-    }
+    }*/
+    get_template_part('partial/sidebar/page');
     ?>
 </div>

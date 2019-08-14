@@ -56,7 +56,7 @@
 }
 
 .main {
-    padding-bottom: 8em;
+    padding-bottom: 2em;
 }
 
 .section {
@@ -154,6 +154,14 @@
 .tweets h2::before {
     content: '\f099';
     font-family: 'FontAwesome';
+}
+
+.tweets div {
+    min-height: 190px;
+}
+
+.tweets div + div {
+    border-left: 1px solid #d4d1cd;
 }
 
 .section a:link,

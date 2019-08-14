@@ -130,15 +130,18 @@ function get_news_page()
 
 
 
-function build_tweet($tweet) {
+function build_tweet($tweet, $user_template) {
     $twitter_user = 'vwsg_web';
 
     $template = <<<TWITTER
 <p class="tweet">
     %s %s
 </p>
-
 TWITTER;
+
+    if ($user_template) {
+        $template = sprintf($user_template, $template);
+    }
 
     $is_retweet = false;
     if (array_key_exists('retweeted_status', $tweet)) {
@@ -202,23 +205,23 @@ TWITTER;
  * Builds tweet from cached json result.
  * Expects cron/twitter.cron.php to be running
  */
-function display_tweet()
+function display_tweet($template = '')
 {
 
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
     $tweet = $json[0];
 
-    echo build_tweet($tweet);
+    echo build_tweet($tweet, $template);
 
 }
 
-function display_tweets() {
+function display_tweets($template = '') {
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
 
 
     foreach ($json as $tweet) {
 
-        echo build_tweet($tweet);
+        echo build_tweet($tweet, $template);
     }
 }
 

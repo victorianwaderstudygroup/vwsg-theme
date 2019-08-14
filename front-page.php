@@ -71,9 +71,11 @@ get_header();
                 ?>
             </ul>
         </div>
-        <div class="col-xs-12 col-md-3 tweets section">
+    </div>
+    <div class="row">
+        <div class="col-xs-12 tweets section">
             <h2> Tweets</h2>
-            <?= display_tweets() ?>
+            <?= display_tweets('<div class="col-xs-12 col-md-4">%s</div>') ?>
         </div>
     </div>
 <?php

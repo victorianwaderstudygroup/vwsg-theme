@@ -28,25 +28,42 @@ get_header();
                 ?>
 
                 <?php
-                $bulletin_args = [
+                $page = get_query_var('paged') ?? 1;
+                $per_page = 4;
+                $gallery_args = [
                     'post_type' => 'attachment',
+                    'post_status' => 'any',
                     'category_name' => 'Gallery',
                     'orderby' => 'name',
-                    'posts_per_page' => 16
+                    'posts_per_page' => $per_page,
+                    'paged' => $page
                 ];
 
-                foreach (get_posts($bulletin_args) as $post):
+                $query = new WP_Query($gallery_args);
+
+                foreach ($query->posts as $post):
                     setup_postdata($post);
                 ?>
                 <div class="col-md-3">
                     <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile" data-fancybox="gallery" data-caption="<?=wp_get_attachment_caption(get_the_ID());?>">
                         <img src="<?= wp_get_attachment_image_src(get_the_ID())[0]; ?>" alt="<?php the_title() ?>">
-                        <caption></caption>
                     </a>
                 </div>
                 <?php
                 endforeach;
                 wp_reset_postdata();
+                ?>
+
+                <?php
+                    echo paginate_links();
+                    for($i = 1; $i <= $query->max_num_pages; $i++):
+                        printf('<a href="%s" class="btn %s">%s</a> ',
+                            '?paged=' . $i,
+                            $page == $i ? 'btn-disabled' : 'btn-default',
+                            $i);
+                    endfor;
+
+
                 ?>
             </div>
         </div>
