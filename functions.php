@@ -231,16 +231,31 @@ function display_tweets($template = '')
 function list_news($attrs)
 {
     $attrs = shortcode_atts([
-        'category' => 'News',
-        'exclude' => 'Archive'
+        'category' => 'News'
     ], $attrs);
 
     $news_args = [
-        'post_type' => 'post',
-        'category_name' => $attrs['category'],
-        'category__not_in' => [get_cat_ID($attrs['exclude'])]
-        // TODO Order:
+        'post_type' => 'post'
     ];
+
+    switch ($attrs['category']) {
+        case 'News':
+            $news_args['category__in'] = [
+                get_cat_ID($attrs['category']),
+                get_cat_ID('Uncategorised')
+            ];
+            $news_args['category__not_in'] = [get_cat_ID('Archive')];
+
+            break;
+        case 'Archive':
+            $news_args['cat'] = get_cat_ID('Archive');
+            $news_args['category__in'] = [get_cat_ID('News'), get_cat_ID('Uncategorised')];
+            break;
+        default:
+            $news_args['cat'] = get_cat_ID($attrs['category']);
+
+    }
+
 
     ob_start();
     $query = new WP_Query($news_args);
