@@ -36,8 +36,8 @@ function vwsg_scripts()
     wp_deregister_script('jquery');
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', [], '3.3.1');
     wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
-    wp_enqueue_script('vwsg-search-script', get_template_directory_uri().'/js/search.js', ['jquery'], '1.0.0');
-    wp_enqueue_script('vwsg-template-script', get_template_directory_uri().'/js/functions.js', ['jquery'], '1.0.0');
+    wp_enqueue_script('vwsg-search-script', get_template_directory_uri() . '/js/search.js', ['jquery'], '1.0.0');
+    wp_enqueue_script('vwsg-template-script', get_template_directory_uri() . '/js/functions.js', ['jquery'], '1.0.0');
 }
 
 add_action('wp_enqueue_scripts', 'vwsg_scripts');
@@ -61,7 +61,7 @@ add_filter('the_generator', function () {
 remove_action('wp_head', 'wp_generator');
 
 
-add_filter('pre_get_posts', function($query) {
+add_filter('pre_get_posts', function ($query) {
     if ($query->is_search === true) {
         $query->set('post_type', ['post', 'page', 'attachment']);
         $query->set('post_status', ['publish', 'inherit']);
@@ -93,10 +93,12 @@ function add_tags_for_attachments()
 add_action('init', 'add_tags_for_attachments');
 
 
-function wpdocs_excerpt_more() {
+function wpdocs_excerpt_more()
+{
     return '...';
 }
-add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
+
+add_filter('excerpt_more', 'wpdocs_excerpt_more');
 
 
 /**
@@ -129,8 +131,8 @@ function get_news_page()
 }
 
 
-
-function build_tweet($tweet, $user_template) {
+function build_tweet($tweet, $user_template)
+{
     $twitter_user = 'vwsg_web';
 
     $template = <<<TWITTER
@@ -215,7 +217,8 @@ function display_tweet($template = '')
 
 }
 
-function display_tweets($template = '') {
+function display_tweets($template = '')
+{
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
 
 
@@ -225,9 +228,42 @@ function display_tweets($template = '') {
     }
 }
 
+function list_news($attrs)
+{
+    $attrs = shortcode_atts([
+        'category' => 'News',
+        'exclude' => 'Archive'
+    ], $attrs);
+
+    $news_args = [
+        'post_type' => 'post',
+        'category_name' => $attrs['category'],
+        'category__not_in' => [get_cat_ID($attrs['exclude'])]
+        // TODO Order:
+    ];
+
+    ob_start();
+    $query = new WP_Query($news_args);
+    if ($query->have_posts()) {
+        while ($query->have_posts()) :
+            $query->the_post();
+
+            get_template_part('partial/news-item');
+
+        endwhile;
+    }
+    wp_reset_postdata();
+    $content = ob_get_contents();
+    ob_end_clean();
+
+    return $content;
+}
+
+add_shortcode('news-listing', 'list_news');
 
 
-function list_fieldwork() {
+function list_fieldwork()
+{
     $fieldwork_args = [
         'post_type' => 'page',
         'category_name' => 'Fieldwork',
@@ -238,18 +274,18 @@ function list_fieldwork() {
     $query = new WP_Query($fieldwork_args);
     $count = 0;
     if ($query->have_posts()) {
-        while($query->have_posts()) :
+        while ($query->have_posts()) :
             $query->the_post();
             $count++; ?>
-                <div class="fieldwork-entry <?=$count == 1 ? 'open': ''?>">
-                    <header>
-                        <h3><?php the_title() ?></h3>
-                    </header>
-                    <div class="content">
-                        <?php the_content(); ?>
-                    </div>
+            <div class="fieldwork-entry <?= $count == 1 ? 'open' : '' ?>">
+                <header>
+                    <h3><?php the_title() ?></h3>
+                </header>
+                <div class="content">
+                    <?php the_content(); ?>
                 </div>
-            <?php
+            </div>
+        <?php
         endwhile;
     }
     wp_reset_postdata();
