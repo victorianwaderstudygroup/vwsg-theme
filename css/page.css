@@ -191,3 +191,70 @@ a.tile:visited {
 .fieldwork-entry.open .content {
     display: block;
 }
+
+.subpage-listing a.thumbnail {
+    border: 0;
+    background: #d4d1cd;
+    color: #262626;
+    margin-bottom: 2em;
+    min-height: 220px;
+    display: block;
+
+    text-decoration: none;
+    position: relative;
+}
+
+.subpage-listing a.thumbnail:hover,
+.subpage-listing a.thumbnail:active {
+    color: #ededed;;
+    background: #464644!important;
+}
+
+.subpage-listing .thumbnail .img-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #d4d1cd;
+    opacity: 0.8;
+}
+
+.subpage-listing .thumbnail .title {
+
+    display: block;
+    font-size: 18px;
+    font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
+    text-transform: lowercase;
+    text-align: center;
+    left: 0;
+    margin-top: 0;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.subpage-listing .thumbnail .desc {
+    display: none;
+}
+
+
+.subpage-listing .thumbnail:hover .img-overlay,
+.subpage-listing .thumbnail:active .img-overlay {
+    display: none;
+}
+
+.subpage-listing .thumbnail:hover .desc,
+.subpage-listing .thumbnail:active .desc {
+    display: block;
+    background: #d4d1cd;
+    color: #262626;
+    position: absolute;
+    padding: 1em;
+    bottom: 0;
+    left: 0;
+
+}

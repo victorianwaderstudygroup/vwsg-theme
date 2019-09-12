@@ -276,6 +276,38 @@ function list_news($attrs)
 
 add_shortcode('news-listing', 'list_news');
 
+function list_subpages($attrs) {
+    $parent_id = get_the_ID();
+    $subpage_args = [
+        'post_type' => 'page',
+        'post_parent' => $parent_id
+    ];
+
+
+
+    ob_start();
+    $query = new WP_Query($subpage_args);
+    if ($query->have_posts()) { ?>
+        <div class="subpage-listing">
+    <?php
+        while ($query->have_posts()) :
+            $query->the_post();
+
+            get_template_part('partial/subpage-listing-item');
+
+        endwhile; ?>
+        </div>
+    <?php
+    }
+    wp_reset_postdata();
+    $content = ob_get_contents();
+    ob_end_clean();
+
+    return $content;
+}
+
+add_shortcode('subpage_listing', 'list_subpages');
+
 
 function list_fieldwork()
 {
