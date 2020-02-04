@@ -376,11 +376,11 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         });
     }
 
-    function walk($elements, $max_depth)
+    function walk($elements, $max_depth, ...$args)
     {
         $elements = $this->get_direct_ancestors($elements);
         //$elements = $this->exclude_top_level_items($elements);
-        $output = parent::walk($elements, $max_depth);
+        $output = parent::walk($elements, $max_depth, $args);
 
         $output = '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
         return $output;
