@@ -280,7 +280,8 @@ function list_subpages($attrs) {
     $parent_id = get_the_ID();
     $subpage_args = [
         'post_type' => 'page',
-        'post_parent' => $parent_id
+        'post_parent' => $parent_id,
+        'orderby' => ['menu_order', 'post_title']
     ];
 
 

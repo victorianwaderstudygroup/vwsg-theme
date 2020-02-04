@@ -16,7 +16,7 @@ while ($parent_post->post_parent) {
 }
 
 // only show submenu if top level ancestor has children
-if (count(get_pages(['child_of' => $parent_post->ID]))) {
+if (count(get_pages(['child_of' => $parent_post->ID, 'sort_column' => 'menu_order,post_title']))) {
     ?>
     <div class="menu">
         <ul>
