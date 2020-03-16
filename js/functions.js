@@ -17,36 +17,39 @@ function bindFieldworkToggle() {
 }
 
 function setupScrollToTop() {
-    var $scroller = $('<button />');
-    $scroller.addClass('scroll-to-top');
-    $scroller.append(
-        $('<i />').addClass('fas fa-arrow-circle-up')
-    );
-    $scroller.attr('title', 'Back to top');
+    var $body = $('body');
+    if (!$body.hasClass('home')) {
+        var $scroller = $('<button />');
+        $scroller.addClass('scroll-to-top');
+        $scroller.append(
+            $('<i />').addClass('fas fa-arrow-circle-up')
+        );
+        $scroller.attr('title', 'Back to top');
 
-    $(window).resize(function() {
-        setScrollerPosition($scroller);
-    }).resize();
+        $(window).resize(function() {
+            setScrollerPosition($scroller);
+        }).resize();
 
-    $scroller.on('click', function () {
-       $(window).scrollTop(0);
-    });
+        $scroller.on('click', function () {
+            $(window).scrollTop(0);
+        });
 
-    $(window).on('scroll', function () {
-        var scrollOffset = ($(document).outerHeight() - ($(document).scrollTop() + $(window).height()));
-        var footerHeight = 540;
-        if (scrollOffset < footerHeight) {
-            $scroller.css('bottom', footerHeight - scrollOffset + 'px');
-        }
+        $(window).on('scroll', function () {
+            var scrollOffset = ($(document).outerHeight() - ($(document).scrollTop() + $(window).height()));
+            var footerHeight = 540;
+            if (scrollOffset < footerHeight) {
+                $scroller.css('bottom', footerHeight - scrollOffset + 'px');
+            }
 
-        if ($(this).scrollTop() > ($(window).height() * 0.2)) {
-            $scroller.fadeIn(200);
-        } else {
-            $scroller.fadeOut(200);
-        }
-    }).scroll();
+            if ($(this).scrollTop() > ($(window).height() * 0.2)) {
+                $scroller.fadeIn(200);
+            } else {
+                $scroller.fadeOut(200);
+            }
+        }).scroll();
 
-    $('body').append($scroller);
+        $body.append($scroller);
+    }
 
 }
 
