@@ -51,6 +51,6 @@ function setupScrollToTop() {
 }
 
 function setScrollerPosition($scroller) {
-    $scroller.css('right', ($(document).outerWidth() - $('.container').outerWidth()) / 2 + 15 + 'px');
+    $scroller.css('right', ($(document).outerWidth() - $('.container').outerWidth()) / 2 + 25 + 'px');
 
 }
