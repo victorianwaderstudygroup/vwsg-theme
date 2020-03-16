@@ -1,6 +1,6 @@
 $(function () {
     bindFieldworkToggle();
-    bindScrollToTop();
+    setupScrollToTop();
 });
 
 function bindFieldworkToggle() {
@@ -16,12 +16,13 @@ function bindFieldworkToggle() {
     });
 }
 
-function bindScrollToTop() {
+function setupScrollToTop() {
     var $scroller = $('<button />');
     $scroller.addClass('scroll-to-top');
     $scroller.append(
         $('<i />').addClass('fas fa-arrow-circle-up')
     );
+    $scroller.attr('title', 'Back to top');
 
     $(window).resize(function() {
         setScrollerPosition($scroller);
