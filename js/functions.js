@@ -1,5 +1,6 @@
 $(function () {
     bindFieldworkToggle();
+    bindScrollToTop();
 });
 
 function bindFieldworkToggle() {
@@ -13,4 +14,42 @@ function bindFieldworkToggle() {
             $entry.addClass('open');
         }
     });
+}
+
+function bindScrollToTop() {
+    var $scroller = $('<button />');
+    $scroller.addClass('scroll-to-top');
+    $scroller.append(
+        $('<i />').addClass('fas fa-arrow-circle-up')
+    );
+
+    $(window).resize(function() {
+        setScrollerPosition($scroller);
+    }).resize();
+
+    $scroller.on('click', function () {
+       $(window).scrollTop(0);
+    });
+
+    $(window).on('scroll', function () {
+        var scrollOffset = ($(document).outerHeight() - ($(document).scrollTop() + $(window).height()));
+        var footerHeight = 540;
+        if (scrollOffset < footerHeight) {
+            $scroller.css('bottom', footerHeight - scrollOffset + 'px');
+        }
+
+        if ($(this).scrollTop() > ($(window).height() * 0.2)) {
+            $scroller.fadeIn(200);
+        } else {
+            $scroller.fadeOut(200);
+        }
+    }).scroll();
+
+    $('body').append($scroller);
+
+}
+
+function setScrollerPosition($scroller) {
+    $scroller.css('right', ($(document).outerWidth() - $('.container').outerWidth()) / 2 + 15 + 'px');
+
 }

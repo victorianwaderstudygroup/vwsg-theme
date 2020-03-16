@@ -303,3 +303,19 @@ a.tile:visited {
 	vertical-align: top;
 	border-top: 1px solid #DDD;
 }
+
+.scroll-to-top {
+	position: fixed;
+	border: 0;
+	background: none;
+	font-size: 36px;
+	z-index: 1;
+	bottom: 15px;
+	right: 34px;
+	padding: 0;
+	display: none;
+}
+
+.scroll-to-top:hover {
+	color: #9d9d9d;
+}
