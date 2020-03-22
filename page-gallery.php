@@ -44,7 +44,7 @@ get_header();
                 foreach ($query->posts as $post):
                     setup_postdata($post);
                 ?>
-                <div class="col-md-3">
+                <div class="col-md-4 col-lg-3">
                     <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile" data-fancybox="gallery" data-caption="<?=wp_get_attachment_caption(get_the_ID());?>">
                         <img src="<?= wp_get_attachment_image_src(get_the_ID())[0]; ?>" alt="<?php the_title() ?>">
                     </a>
@@ -54,6 +54,7 @@ get_header();
                 wp_reset_postdata();
                 ?>
 
+				<div class="col-xs-12">
                 <?php
                     echo paginate_links();
                     for($i = 1; $i <= $query->max_num_pages; $i++):
@@ -62,9 +63,8 @@ get_header();
                             $page == $i ? 'btn-disabled' : 'btn-default',
                             $i);
                     endfor;
-
-
                 ?>
+				</div>
             </div>
         </div>
     </div>

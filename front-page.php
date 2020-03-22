@@ -42,7 +42,7 @@ get_header();
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-9 main">
+        <div class="col-xs-12 col-md-8 col-lg-9 main">
             <?php
             if (have_posts()) :
                 while (have_posts()) : the_post(); ?>
@@ -53,7 +53,7 @@ get_header();
             endif;
             ?>
         </div>
-        <div class="col-xs-12 col-md-3 news section">
+        <div class="col-xs-12 col-md-4 col-lg-3 news section">
             <h2>News</h2>
             <ul>
                 <?php
