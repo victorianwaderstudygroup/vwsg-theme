@@ -43,7 +43,7 @@
                     'category' => 4,
                     'numberposts' => 1,
                     'post_type' => 'attachment',
-                    'orderby' => 'name'
+                    'orderby' => 'title'
                 ];
                 foreach (get_posts($args) as $post) : setup_postdata($post); ?>
                     <a href="<?=wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>" target="_blank" class="bulletin">
