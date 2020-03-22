@@ -31,14 +31,14 @@ get_header();
                 $bulletin_args = [
                     'post_type' => 'attachment',
                     'category_name' => 'Bulletin',
-                    'orderby' => 'name',
+                    'orderby' => 'title',
                     'posts_per_page' => 999
                 ];
 
                 foreach (get_posts($bulletin_args) as $post):
                     setup_postdata($post);
                 ?>
-                <div class="col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="<?= wp_get_attachment_url(get_the_ID()); ?>" target="_blank" class="tile bulletin">
                         <img src="<?= wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title() ?>">
                         <span><?= nl2br(get_the_content(get_the_ID())); ?></span>
