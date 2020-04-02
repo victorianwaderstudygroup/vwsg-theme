@@ -70,4 +70,4 @@ $response = curl_exec($ch);
 curl_close($ch);*/
 
 
-file_put_contents(TWITTER_USER.'.json', $response);
+file_put_contents(dirname(__FILE__).TWITTER_USER.'.json', $response);
