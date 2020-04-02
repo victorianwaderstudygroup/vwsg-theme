@@ -9,13 +9,21 @@
 
 <div class="col-sm-6 col-md-4">
     <?php
-    $url = get_the_post_thumbnail_url(get_the_ID(), [220, 220]);
+	$meta = get_post_meta(get_the_ID());
+	if (array_key_exists('redirect', $meta)) {
+		$url = $meta['redirect'][0];
+		$target = '_blank';
+	} else {
+		$url = get_the_permalink(get_the_ID());
+	}
+
+	$image_url = get_the_post_thumbnail_url(get_the_ID(), [220, 220]);
     $bg_image = '';
-    if ($url) {
-        $bg_image = sprintf('style="background-image: url(\'%s\'); background-size: cover;"', $url);
+    if ($image_url) {
+        $bg_image = sprintf('style="background-image: url(\'%s\'); background-size: cover;"', $image_url);
     }
     ?>
-    <a class="thumbnail" href="<?php the_permalink()?>" <?=$bg_image?>>
+    <a class="thumbnail" href="<?=$url?>" target="<?=$target?>" <?=$bg_image?>>
         <?=$url ? '<div class="img-overlay"></div>':''; ?>
         <span class="title">
             <?php the_title() ?>
