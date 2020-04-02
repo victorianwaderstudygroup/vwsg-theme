@@ -10,9 +10,12 @@
 <div class="col-sm-6 col-md-4">
     <?php
 	$meta = get_post_meta(get_the_ID());
+	$target = '';
 	if (array_key_exists('redirect', $meta)) {
 		$url = $meta['redirect'][0];
-		$target = '_blank';
+		if (strpos($url, get_site_url()) !== 0) {
+			$target = '_blank';
+		}
 	} else {
 		$url = get_the_permalink(get_the_ID());
 	}
