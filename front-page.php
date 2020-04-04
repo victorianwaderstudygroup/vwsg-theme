@@ -54,7 +54,7 @@ get_header();
 			?>
 		</div>
 		<div class="col-xs-12 col-md-4 col-lg-4 news section">
-			<h2><i class="far fa-newspaper"></i> News</h2>
+			<h2><i class="far fa-newspaper"></i> Latest News</h2>
 			<?php
 			$args = [
 				'numberposts' => 1,
