@@ -89,9 +89,7 @@ a:visited {
 }
 
 .search-form {
-    top: 8px;
-    position: absolute;
-    right: 10px;
+    margin-top: 8px;
 }
 
 .search-field {
@@ -258,12 +256,16 @@ footer .bulletin {
     }
 
     .navbar-brand + .navbar-collapse {
-        margin-left: 215px;
+        margin-left: 225px;
     }
 
     .navbar-nav > li > a {
         padding-left: 12px;
         padding-right: 12px;
+    }
+
+    .search-form {
+        margin-right: 10px;
     }
 
     .search-field {
@@ -276,5 +278,13 @@ footer .bulletin {
 
     .container {
         width: auto;
+    }
+
+    .feature {
+        padding-right: 20px;
+    }
+
+    .feature span {
+        padding-left: 80px;
     }
 }

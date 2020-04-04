@@ -325,4 +325,8 @@ a.tile:visited {
 		padding-right: 20px;
 		padding-top: 164px;
 	}
+
+	.subpage-listing a.thumbnail {
+		min-height: 183px;
+	}
 }

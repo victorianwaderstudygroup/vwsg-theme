@@ -3,6 +3,10 @@
 	width: 100%;
 }
 
+.banner img {
+	max-width: 100%;
+}
+
 .features {
 	margin-top: 2px;
 }
@@ -55,7 +59,7 @@
 }
 
 .main {
-	padding-bottom: 2em;
+	padding: 0 1.5em 2em;
 }
 
 .section {
@@ -70,14 +74,14 @@
 	text-transform: uppercase;
 	text-align: center;
 	margin: 0 0 1em;
-	background: #D4D1CD;
-	color: #262626;
+	background: #6e7267;
+	color: #FFF;
 	position: absolute;
-	padding: 0.5em 0;
+	padding: 0.8em 0;
 	left: 0;
 	right: 0;
 	top: 0;
-	font-size: 26px;
+	font-size: 20px;
 }
 
 .section h3 {
@@ -121,38 +125,49 @@
 }*/
 
 .news {
-	padding-top: 4em;
-	padding-bottom: 0;
+	padding-top: 4.2em;
+	padding-bottom: 4.0em;
 }
 
 .news h2 {
-	padding-top: 16px;
 	margin-bottom: 0;
-}
-
-.news h2::before {
-	content: '\f1ea';
-	font-family: 'FontAwesome';
-	padding-right: 8px;
-	vertical-align: bottom;
-}
-
-.news ul {
-	padding: 0;
+	text-align: left;
+	padding-left: 22px;
 }
 
 .news_item {
-	list-style-type: none;
 	padding: 1em 0.5em;
 }
 
-.news_item + .news_item {
-	border-top: 1px solid #D4D1CD;
+.news_item h3 {
+	font-size: 22px;
+	padding: 0 0 0.5em;
+	margin: 0;
 }
 
-.tweets h2::before {
-	content: '\f099';
-	font-family: 'FontAwesome';
+.news p {
+	margin-bottom: 10px;
+}
+
+.news a.more-news:link,
+.news a.more-news:visited {
+	color: #262626;
+	padding: 12px 22px;
+	background: #D4D1CD;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-family: 'Julius Sans One', 'Open Sans', sans-serif;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.news a.more-news:hover,
+.news a.more-news:active {
+	color: #EDEDED;
+	background: #464644;
 }
 
 .tweets div {
