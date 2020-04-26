@@ -82,15 +82,15 @@ function initSearchExpand() {
 
 function initToggleSubmenu() {
     var $submenu = $('.sidebar .menu');
-    var $toggle = $('.toggle-submenu');
+    var $toggleWrapper = $('.toggle-submenu');
 
-    $toggle.on('click', function() {
-        if ($toggle.hasClass('hide-menu')) {
+    $toggleWrapper.on('click', '.btn', function() {
+        if ($toggleWrapper.hasClass('hide-menu')) {
             $submenu.removeClass('show');
-            $toggle.removeClass('hide-menu');
+            $toggleWrapper.removeClass('hide-menu');
         } else {
             $submenu.addClass('show');
-            $toggle.addClass('hide-menu');
+            $toggleWrapper.addClass('hide-menu');
         }
     })
 }
