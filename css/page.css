@@ -348,6 +348,20 @@ a.tile:visited {
 	border-top: 1px solid #DDD;
 }
 
+figcaption {
+	font-size: 85%;
+	color: #555;
+	text-align: center;
+	display: block;
+	width: 100%;
+	margin-bottom: 1em;
+	font-style: italic;
+}
+
+figcaption.blocks-gallery-caption {
+	margin-bottom: 3em;
+}
+
 .scroll-to-top {
 	position: fixed;
 	border: 0;
