@@ -443,4 +443,8 @@ a.tile:visited {
 	.toggle-submenu .btn {
 		width: 100%
 	}
+
+	.main {
+		padding: 20px;
+	}
 }

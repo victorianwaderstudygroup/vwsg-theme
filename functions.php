@@ -15,7 +15,7 @@ function vwsg_styles()
     }
 
     if (!is_front_page() || is_news()) {
-        wp_enqueue_style('vwsg-page-style', get_template_directory_uri() . '/css/page.css', ['vwsg-style'], '1.1.0');
+        wp_enqueue_style('vwsg-page-style', get_template_directory_uri() . '/css/page.css', ['vwsg-style'], '1.1.1');
     }
 
     if (is_search()) {
