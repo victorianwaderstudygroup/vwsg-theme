@@ -2,13 +2,13 @@
     </div>
     <footer>
         <div class="container">
-            <div class="col-xs-12 col-md-3 twitter">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-3 col-md-offset-0 twitter">
                 <?=display_tweet()?>
                 <p class="handle">
                     <a href="//twitter.com/vwsg_web">vwsg_web</a>
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6 gallery">
+            <div class="col-xs-12 col-sm-6 col-md-6 gallery">
                 <h3><a href="<?=get_permalink( get_post( 54 ) ) ?>">Gallery</a></h3>
                 <?php
                     $i = 0;
@@ -35,7 +35,7 @@
 
                 </div>
             </div>
-            <div class="col-xs-12 col-md-3 bulletin">
+            <div class="col-xs-12 col-sm-6 col-md-3 bulletin">
                 <h3><a href="<?=get_permalink( get_post(282) ) ?>">Bulletin </a></h3>
                 <?php
                 $i = 0;

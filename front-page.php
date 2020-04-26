@@ -28,7 +28,7 @@ get_header();
 			'order' => 'ASC'
 		];
 		foreach (get_posts($args) as $post) : setup_postdata($post); ?>
-			<a class="col-xs-12 col-sm-6 col-md-4 feature" href="<?=the_permalink()?>">
+			<a class="col-xs-12 col-sm-4 feature" href="<?=the_permalink()?>">
 				<?php if (has_post_thumbnail()) : ?>
 					<img src="<?=the_post_thumbnail_url('75');?>" class="feature-img">
 				<?php
@@ -78,6 +78,8 @@ get_header();
 		<div class="col-xs-12 tweets section">
 			<h2><i class="fab fa-twitter"></i> Tweets</h2>
 			<?=display_tweets('<div class="col-xs-12 col-md-4">%s</div>')?>
+
+			<a class="more-tweets" href="http://twitter.com/vwsg_web">More tweets <i class="fab fa-twitter"></i></a>
 		</div>
 	</div>
 <?php

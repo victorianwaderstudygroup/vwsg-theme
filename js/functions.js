@@ -1,6 +1,8 @@
 $(function () {
     bindFieldworkToggle();
     setupScrollToTop();
+    initSearchExpand();
+    initToggleSubmenu();
 });
 
 function bindFieldworkToggle() {
@@ -50,10 +52,45 @@ function setupScrollToTop() {
 
         $body.append($scroller);
     }
-
 }
 
 function setScrollerPosition($scroller) {
     $scroller.css('right', ($(document).outerWidth() - $('.container').outerWidth()) / 2 + 25 + 'px');
 
+}
+
+function isBreakpoint(name) {
+    return $('.device-' + name).is(':visible');
+}
+
+function initSearchExpand() {
+    var $searchForm = $('.search-form');
+    $('.search-submit').on('click', function(e) {
+        if (isBreakpoint('sm') && !$searchForm.hasClass('expand')) {
+            $searchForm.addClass('expand');
+            $('.search-field').focus();
+            e.preventDefault();
+        }
+    });
+
+    $('.search-collapse').on('click', function (e) {
+        e.preventDefault();
+        $searchForm.removeClass('expand');
+    });
+}
+
+
+function initToggleSubmenu() {
+    var $submenu = $('.sidebar .menu');
+    var $toggle = $('.toggle-submenu');
+
+    $toggle.on('click', function() {
+        if ($toggle.hasClass('hide-menu')) {
+            $submenu.removeClass('show');
+            $toggle.removeClass('hide-menu');
+        } else {
+            $submenu.addClass('show');
+            $toggle.addClass('hide-menu');
+        }
+    })
 }

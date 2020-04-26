@@ -14,16 +14,12 @@ function vwsg_styles()
         wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.0.0');
     }
 
-    if (!is_front_page()) {
+    if (!is_front_page() || is_news()) {
         wp_enqueue_style('vwsg-page-style', get_template_directory_uri() . '/css/page.css', ['vwsg-style'], '1.0.0');
     }
 
     if (is_search()) {
         wp_enqueue_style('vwsg-search-style', get_template_directory_uri() . '/css/search.css', ['vwsg-page-style'], '1.0.0');
-    }
-
-    if (is_news()) {
-        wp_enqueue_style('vwsg-news-style', get_template_directory_uri() . '/css/news.css', ['vwsg-page-style'], '1.0.0');
     }
 }
 
@@ -35,6 +31,7 @@ function vwsg_scripts()
 {
     wp_deregister_script('jquery');
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', [], '3.3.1');
+    wp_enqueue_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', [], '3.3.1');
     wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
     wp_enqueue_script('vwsg-search-script', get_template_directory_uri() . '/js/search.js', ['jquery'], '1.0.0');
     wp_enqueue_script('vwsg-template-script', get_template_directory_uri() . '/js/functions.js', ['jquery'], '1.0.0');
@@ -344,6 +341,18 @@ function list_fieldwork()
 }
 
 add_shortcode('fieldwork-listing', 'list_fieldwork');
+
+function get_top_ancestor() {
+	$parent_post = get_post();
+	while ($parent_post->post_parent) {
+		$parent_post = get_post($parent_post->post_parent);
+	}
+	return $parent_post;
+}
+
+function get_child_pages($parent_post) {
+	return get_pages(['child_of' => $parent_post->ID, 'sort_column' => 'menu_order,post_title']);
+}
 
 class Breadcrumb_Walker extends Walker_Nav_Menu
 {
@@ -655,3 +664,4 @@ function my_wp_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
         return $sorted_menu_items;
     }
 }*/
+

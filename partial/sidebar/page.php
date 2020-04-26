@@ -9,14 +9,17 @@
 ?>
 <?php
 
-// Find top ancestor
-$parent_post = get_post();
-while ($parent_post->post_parent) {
-    $parent_post = get_post($parent_post->post_parent);
+if (!isset($parent_post)) {
+	$parent_post = get_top_ancestor();
 }
 
+if (!isset($child_pages)) {
+	$child_pages = get_child_pages($parent_post);
+}
+
+
 // only show submenu if top level ancestor has children
-if (count(get_pages(['child_of' => $parent_post->ID, 'sort_column' => 'menu_order,post_title']))) {
+if (count($child_pages)) {
     ?>
     <div class="menu">
         <ul>
