@@ -63,7 +63,24 @@ get_header();
 				'orderby' => 'date',
 				'order' => 'DESC'
 			];
-			echo list_news([], $args, true);
+
+
+					$news_args['category__in'] = [
+						get_cat_ID($attrs['category']),
+						get_cat_ID('Uncategorised')
+					];
+					$news_args['category__not_in'] = [get_cat_ID('Archive')];
+
+			$query = new WP_Query($news_args);
+			if ($query->have_posts()) {
+				while ($query->have_posts()) :
+					$query->the_post();
+
+						get_template_part('partial/news-item-compact');
+
+				endwhile;
+			}
+			wp_reset_postdata();
 			?>
 			<a class="more-news" href="/news-events">More news &rarr;</i></a>
 		</div>
