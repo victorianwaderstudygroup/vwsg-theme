@@ -56,20 +56,14 @@ get_header();
 		<div class="col-xs-12 col-md-4 col-lg-4 news section">
 			<h2><i class="far fa-newspaper"></i> Latest News</h2>
 			<?php
+
 			$args = [
 				'numberposts' => 1,
 				'post_type' => 'post',
 				'orderby' => 'date',
 				'order' => 'DESC'
 			];
-			foreach (get_posts($args) as $post) : setup_postdata($post); ?>
-				<div class="news_item">
-					<h3><?php the_title() ?></h3>
-					<?php the_excerpt(); ?>
-					<a href="<?php the_permalink() ?>">Continue reading <?php the_title() ?></a>
-				</div>
-			<?php endforeach;
-			wp_reset_postdata();
+			echo list_news($args, true);
 			?>
 			<a class="more-news" href="/news-events">More news &rarr;</i></a>
 		</div>

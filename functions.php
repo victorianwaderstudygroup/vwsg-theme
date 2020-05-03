@@ -225,7 +225,7 @@ function display_tweets($template = '')
     }
 }
 
-function list_news($attrs)
+function list_news($attrs, $compact = false)
 {
     $attrs = shortcode_atts([
         'category' => 'News'
@@ -260,7 +260,11 @@ function list_news($attrs)
         while ($query->have_posts()) :
             $query->the_post();
 
-            get_template_part('partial/news-item');
+        	if ($compact) {
+				get_template_part('partial/news-item-compact');
+			} else {
+				get_template_part('partial/news-item');
+			}
 
         endwhile;
     }
