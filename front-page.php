@@ -61,22 +61,20 @@ get_header();
 				'posts_per_page' => 1,
 				'post_type' => 'post',
 				'orderby' => 'date',
-				'order' => 'DESC'
+				'order' => 'DESC',
+				'category__in' => [
+					get_cat_ID('News'),
+					get_cat_ID('Uncategorised')
+				],
+				'category__not_in' => [get_cat_ID('Archive')]
 			];
 
-
-					$news_args['category__in'] = [
-						get_cat_ID('News'),
-						get_cat_ID('Uncategorised')
-					];
-					$news_args['category__not_in'] = [get_cat_ID('Archive')];
-
-			$query = new WP_Query($news_args);
+			$query = new WP_Query($args);
 			if ($query->have_posts()) {
 				while ($query->have_posts()) :
 					$query->the_post();
 
-						get_template_part('partial/news-item-compact');
+					get_template_part('partial/news-item-compact');
 
 				endwhile;
 			}
