@@ -63,7 +63,7 @@ get_header();
 				'orderby' => 'date',
 				'order' => 'DESC'
 			];
-			echo list_news($args, true);
+			echo list_news([], $args, true);
 			?>
 			<a class="more-news" href="/news-events">More news &rarr;</i></a>
 		</div>

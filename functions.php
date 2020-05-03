@@ -225,7 +225,7 @@ function display_tweets($template = '')
     }
 }
 
-function list_news($attrs, $compact = false)
+function list_news(Array $attrs, Array $query_args = [], $compact = false)
 {
     $attrs = shortcode_atts([
         'category' => 'News'
@@ -252,6 +252,8 @@ function list_news($attrs, $compact = false)
             $news_args['cat'] = get_cat_ID($attrs['category']);
 
     }
+
+    $news_args = array_merge($news_args, $query_args);
 
 
     ob_start();
