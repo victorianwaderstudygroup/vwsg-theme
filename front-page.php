@@ -66,7 +66,7 @@ get_header();
 
 
 					$news_args['category__in'] = [
-						get_cat_ID($attrs['category']),
+						get_cat_ID('News'),
 						get_cat_ID('Uncategorised')
 					];
 					$news_args['category__not_in'] = [get_cat_ID('Archive')];
