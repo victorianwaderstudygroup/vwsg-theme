@@ -58,7 +58,7 @@ get_header();
 			<?php
 
 			$args = [
-				'numberposts' => 1,
+				'posts_per_page' => 1,
 				'post_type' => 'post',
 				'orderby' => 'date',
 				'order' => 'DESC'
