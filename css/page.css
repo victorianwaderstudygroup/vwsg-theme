@@ -362,6 +362,13 @@ figcaption.blocks-gallery-caption {
 	margin-bottom: 3em;
 }
 
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image.is-resized > figcaption {
+	width: auto;
+}
+
 .scroll-to-top {
 	position: fixed;
 	border: 0;
