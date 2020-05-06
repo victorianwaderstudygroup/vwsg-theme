@@ -369,6 +369,34 @@ figcaption.blocks-gallery-caption {
 	width: auto;
 }
 
+p.callout {
+	background: #EDEDED;
+	font-size: 20px;
+	font-weight: bold;
+	box-shadow: 3px 3px 20px -5px #ddd;
+	border: 1px solid #ddd;
+	color: #464644;
+	text-align: center;
+}
+
+p.callout + p.callout {
+	margin-top: -0.5em;
+}
+
+p.callout a:link,
+p.callout a:visited {
+	display: block;
+	padding: 8px 15px;
+	color: #464644;
+}
+
+p.callout a:hover,
+p.callout a:active {
+	text-decoration: none;
+	background: #464644;
+	color: #EDEDED;
+}
+
 .scroll-to-top {
 	position: fixed;
 	border: 0;
