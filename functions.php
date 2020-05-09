@@ -11,7 +11,7 @@ function vwsg_styles()
     wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.1.0');
 
     if (is_front_page()) {
-        wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.1.0');
+        wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.1.1');
     }
 
     if (!is_front_page() || is_news()) {
