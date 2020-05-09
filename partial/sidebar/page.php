@@ -9,6 +9,10 @@
 ?>
 <?php
 
+if (is_single()) {
+	$parent_post = get_page_by_title('News & Events');
+}
+
 if (!isset($parent_post)) {
 	$parent_post = get_top_ancestor();
 }

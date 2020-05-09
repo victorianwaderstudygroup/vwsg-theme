@@ -15,6 +15,7 @@
             <li>
                 <a href="<?= get_permalink() ?>"><span class="divider">&gt;</span><?= get_the_title() ?></a>
             </li>
+		<?php } else { ?>
             <li>
                 <a href="<?= get_permalink() ?>"><span class="divider">&gt;</span><?= get_the_title() ?></a>
             </li>

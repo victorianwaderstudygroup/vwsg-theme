@@ -11,7 +11,6 @@ get_header();
 
     <div class="row">
         <?php get_sidebar(); ?>
-
         <div class="col-xs-12 col-md-9 main">
             <?php get_breadcrumb(); ?>
 

@@ -239,6 +239,10 @@ a.tile:visited {
 	display: block;
 }
 
+p + .subpage-listing {
+	margin-top: 4em;
+}
+
 .subpage-listing a.thumbnail {
 	border: 0;
 	background: #D4D1CD;
@@ -360,6 +364,13 @@ figcaption {
 
 figcaption.blocks-gallery-caption {
 	margin-bottom: 3em;
+}
+
+.blocks-gallery-grid .blocks-gallery-image figcaption,
+.blocks-gallery-grid .blocks-gallery-item figcaption,
+.wp-block-gallery .blocks-gallery-image figcaption,
+.wp-block-gallery .blocks-gallery-item figcaption {
+	margin-bottom: 0;
 }
 
 .wp-block-image .aligncenter > figcaption,
