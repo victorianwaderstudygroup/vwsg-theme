@@ -81,7 +81,7 @@ if (count($child_pages)) {
 				}
 
 				$page_meta = get_post_meta($page->ID);
-				if (array_key_exists('redirect', $page_meta)) {
+				if (array_key_exists('redirect', $page_meta) && stripos($page_meta['redirect'][0], get_site_url()) === false) {
 					$target = '_blank';
 					array_push($classes, 'external');
 					$title = sprintf("%s %s", $title, '<i class="fas fa-external-link-alt"></i>');
