@@ -88,7 +88,7 @@ if (count($child_pages)) {
 				}
 
 
-            	printf('<li class="%s"><a href="%s" target="%s">%s</a>', implode(' ', $classes), $url, $target, $title);
+            	printf('<li class="%s"><a href="%s" target="%s">%s</a>', implode(' ', $classes), get_the_permalink($page->ID), $target, $title);
 
 
 
