@@ -58,6 +58,7 @@
 
 .sidebar .menu li {
 	list-style: none;
+	position: relative;
 }
 
 .sidebar .menu li a:link,
@@ -68,6 +69,17 @@
 	display: block;
 	padding: 12px 18px 8px;
 	line-height: 1.5;
+}
+
+.sidebar .menu li.external a:link,
+.sidebar .menu li.external a:visited {
+	padding-right: 36px;
+}
+
+.external .fas {
+	position: absolute;
+	top: 12px;
+	right: 12px;
 }
 
 .sidebar .menu li.page_item_top > a:link,
