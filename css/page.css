@@ -225,8 +225,9 @@ a.tile:visited {
 
 .fieldwork-entry header::before {
 	content: '\f078';
+	font-weight: 900;
 	font-size: 18px;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5 Free';
 	padding-right: 4px;
 	float: right;
 	vertical-align: top;

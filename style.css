@@ -217,13 +217,18 @@ footer h3 a:active .fas {
 
 .twitter p::before {
 	content: '\f099';
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5 Brands';
 }
 
 .tweet .read-more {
 	color: #FFF;
 	display: block;
 	font-size: 13px;
+}
+
+footer .tweet {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .copyright {
