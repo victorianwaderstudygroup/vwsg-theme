@@ -56,7 +56,9 @@ get_header();
 
 				<div class="col-xs-12">
                 <?php
-                    echo paginate_links();
+					$page = get_query_var('paged');
+					$page = $page == 0 ? 1 : $page;
+
                     for($i = 1; $i <= $query->max_num_pages; $i++):
                         printf('<a href="%s" class="btn %s">%s</a> ',
                             '?paged=' . $i,
