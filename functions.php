@@ -232,7 +232,8 @@ function list_news($attrs)
     ], $attrs);
 
     $news_args = [
-        'post_type' => 'post'
+        'post_type' => 'post',
+		'posts_per_page' => -1,
     ];
 
     switch ($attrs['category']) {
@@ -260,15 +261,16 @@ function list_news($attrs)
         while ($query->have_posts()) :
             $query->the_post();
 
-        	if ($compact) {
+        /*	if ($compact) {
 				get_template_part('partial/news-item-compact');
-			} else {
+			} else {*/
 				get_template_part('partial/news-item');
-			}
+//			}
 
         endwhile;
     }
     wp_reset_postdata();
+    echo paginate_links();
     $content = ob_get_contents();
     ob_end_clean();
 
@@ -366,13 +368,14 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         $ancestors = [];
 
         do {
-            $ancestor = array_pop(array_filter($elements, function ($item) use ($currentID) {
-                if ($item->ID == $currentID || $item->object_id == $currentID) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }));
+        	$ancestor = array_filter($elements, function ($item) use ($currentID) {
+				if ($item->ID == $currentID || $item->object_id == $currentID) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+            $ancestor = array_pop($ancestor);
             $currentID = $ancestor->post_parent;
             array_unshift($ancestors, $ancestor);
         } while ($ancestor->menu_item_parent > 0);
