@@ -54,7 +54,7 @@ get_header();
                 wp_reset_postdata();
                 ?>
 
-				<div class="col-xs-12">
+				<div class="col-xs-12 pagination">
                 <?php
 					$page = get_query_var('paged');
 					$page = $page == 0 ? 1 : $page;
@@ -62,7 +62,7 @@ get_header();
                     for($i = 1; $i <= $query->max_num_pages; $i++):
                         printf('<a href="%s" class="btn %s">%s</a> ',
                             '?paged=' . $i,
-                            $page == $i ? 'btn-disabled' : 'btn-default',
+                            $page == $i ? 'btn-current' : 'btn-default',
                             $i);
                     endfor;
                 ?>

@@ -438,6 +438,17 @@ p.callout a:active {
 	color: #9D9D9D;
 }
 
+.pagination a.btn-default {
+	background: #DDD;
+	border-color: #DDD;
+	color: #464644;
+}
+
+.pagination a.btn-current {
+	background: #B8724C;
+	color: #FFF;
+}
+
 @media (max-width: 1199px) {
 
 	.sidebar {

@@ -231,9 +231,14 @@ function list_news($attrs)
         'category' => 'News'
     ], $attrs);
 
+	$page = get_query_var('paged');
+	$page = $page == 0 ? 1 : $page;
+	$per_page = 10;
+
     $news_args = [
         'post_type' => 'post',
-		'posts_per_page' => -1,
+		'posts_per_page' => $per_page,
+		'offset' => ($page - 1) * $per_page,
     ];
 
     switch ($attrs['category']) {
@@ -270,7 +275,24 @@ function list_news($attrs)
         endwhile;
     }
     wp_reset_postdata();
-    echo paginate_links();
+
+    ?>
+
+	<div class="col-xs-12 pagination">
+		<?php
+		$page = get_query_var('paged');
+		$page = $page == 0 ? 1 : $page;
+
+		for($i = 1; $i <= $query->max_num_pages; $i++):
+			printf('<a href="%s" class="btn %s">%s</a> ',
+				'?paged=' . $i,
+				$page == $i ? 'btn-current' : 'btn-default',
+				$i);
+		endfor;
+		?>
+	</div>
+
+	<?php
     $content = ob_get_contents();
     ob_end_clean();
 
