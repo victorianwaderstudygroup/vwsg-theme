@@ -29,7 +29,7 @@ get_header();
 
                 <?php
                 $page = get_query_var('paged') ?? 1;
-                $per_page = 4;
+                $per_page = 16;
                 $gallery_args = [
                     'post_type' => 'attachment',
                     'post_status' => 'any',
