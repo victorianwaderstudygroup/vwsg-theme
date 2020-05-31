@@ -82,15 +82,19 @@
 	right: 12px;
 }
 
-.sidebar .menu li.page_item_top > a:link,
+/*.sidebar .menu li.page_item_top > a:link,
 .sidebar .menu li.page_item_top > a:visited {
 	background: #B8724C;
+	background: #464644;
+	#background: #6E7267;
 	color: #FFF;
-}
+}*/
 
 .sidebar .menu li.current_page_item > a:link,
 .sidebar .menu li.current_page_item > a:visited {
 	background: #F5F5F5;
+	background: #B8724C;
+	color: #FFF;
 }
 
 .sidebar .menu li a:hover,

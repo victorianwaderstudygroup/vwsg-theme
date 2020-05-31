@@ -29,8 +29,9 @@ if (count($child_pages)) {
         <ul>
             <?php
             printf(
-                '<li class="page_item page_item_top page-item-%d"><a href="%s">%s</a></li>',
+                '<li class="page_item page_item_top page-item-%d %s"><a href="%s">%s</a></li>',
                 $parent_post->ID,
+                $parent_post->ID === get_the_ID() ? 'current_page_item' : '',
                 get_permalink($parent_post->ID),
                 $parent_post->post_title
             );
