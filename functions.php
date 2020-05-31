@@ -8,18 +8,18 @@ function vwsg_styles()
     wp_enqueue_style('bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', [], '3.3.7');
     wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', [], '3.5.7');
 
-    wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.1.0');
+    wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.0.0');
 
     if (is_front_page()) {
-        wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.1.1');
+        wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.0.0');
     }
 
     if (!is_front_page() || is_news()) {
-        wp_enqueue_style('vwsg-page-style', get_template_directory_uri() . '/css/page.css', ['vwsg-style'], '1.1.2');
+        wp_enqueue_style('vwsg-page-style', get_template_directory_uri() . '/css/page.css', ['vwsg-style'], '1.0.0');
     }
 
     if (is_search()) {
-        wp_enqueue_style('vwsg-search-style', get_template_directory_uri() . '/css/search.css', ['vwsg-page-style'], '1.1.0');
+        wp_enqueue_style('vwsg-search-style', get_template_directory_uri() . '/css/search.css', ['vwsg-page-style'], '1.0.0');
     }
 }
 
@@ -34,7 +34,7 @@ function vwsg_scripts()
     wp_enqueue_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', [], '3.3.1');
     wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
     wp_enqueue_script('vwsg-search-script', get_template_directory_uri() . '/js/search.js', ['jquery'], '1.0.0');
-    wp_enqueue_script('vwsg-template-script', get_template_directory_uri() . '/js/functions.js', ['jquery'], '1.0.1');
+    wp_enqueue_script('vwsg-template-script', get_template_directory_uri() . '/js/functions.js', ['jquery'], '1.0.0');
 }
 
 add_action('wp_enqueue_scripts', 'vwsg_scripts');
