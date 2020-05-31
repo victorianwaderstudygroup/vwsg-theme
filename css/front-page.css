@@ -1,0 +1,298 @@
+
+.banner {
+	left: 0;
+	width: 100%;
+}
+
+.banner img {
+	max-width: 100%;
+}
+
+.features {
+	margin-top: 2px;
+}
+
+.feature {
+	background: #D4D1CD;
+	padding: 0 30px 0 25px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
+	text-transform: lowercase;
+	font-size: 18px;
+	position: relative;
+	display: block;
+	color: #262626;
+}
+
+.feature:hover {
+	color: #EDEDED;
+	background: #464644;
+}
+
+.features a {
+	color: inherit;
+}
+
+.feature span {
+	display: inline-block;
+	padding-left: 100px;
+	vertical-align: middle;
+	line-height: normal;
+}
+
+.feature-img {
+	position: absolute;
+	left: 15px;
+	top: 12px;
+	width: 75px;
+	height: 75px;
+	border-radius: 40px;
+}
+
+.feature + .feature {
+	border-left: 2px solid #EDEDED;
+}
+
+.home h1 {
+	margin-top: 1.2em;
+}
+
+.main {
+	padding: 0 1.5em 2em;
+}
+
+.section {
+	background: #EFEEED;
+	margin-top: 1.5em;
+	padding-top: 5em;
+	padding-bottom: 1em;
+}
+
+.section h2 {
+	font-family: 'Julius Sans One', 'Open Sans', sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 0 0 1em;
+	background: #6e7267;
+	color: #FFF;
+	position: absolute;
+	padding: 0.8em 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	font-size: 20px;
+}
+
+.section h3 {
+	font-size: 15px;
+	color: #444;
+	padding: 0 15px;
+	line-height: 1.2;
+	margin-top: 1.2em;
+	margin-bottom: 0;
+}
+
+.section h3 a {
+	color: inherit;
+	display: block;
+	overflow: auto;
+	margin-left: -15px;
+	padding-top: 4px;
+}
+
+/*.news_item .date {
+    font-family: 'Julius Sans One', 'Open Sans', 'sans-serif';
+    font-size: 15px;
+    text-transform: lowercase;
+    display: inline-block;
+    line-height: 1.1;
+    width: 55px;
+    margin: -4px 0 0 0;
+    text-align: center;
+    background: #e8e8e8;
+    padding: 8px 0 7px;
+    border-radius: 5px;
+}*/
+
+/*.section .title {
+    display: inline-block;
+}*/
+
+/*.section a:hover .date {
+    background: #464644;
+    color: #ededed;
+}*/
+
+.news {
+	padding-top: 4.2em;
+	padding-bottom: 4.0em;
+}
+
+.news h2 {
+	margin-bottom: 0;
+	text-align: left;
+	padding-left: 22px;
+}
+
+.news_item {
+	padding: 1em 0.5em;
+}
+
+.news_item h3 {
+	font-size: 22px;
+	padding: 0 0 0.5em;
+	margin: 0;
+}
+
+.news p {
+	margin-bottom: 10px;
+}
+
+.news a.more-news:link,
+.news a.more-news:visited {
+	color: #262626;
+	padding: 12px 22px;
+	background: #D4D1CD;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-family: 'Julius Sans One', 'Open Sans', sans-serif;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.news a.more-news:hover,
+.news a.more-news:active {
+	color: #EDEDED;
+	background: #464644;
+}
+
+.tweets {
+	padding-bottom: 4em;
+}
+
+.tweets div {
+	min-height: 190px;
+}
+
+.tweets div + div {
+	border-style: solid;
+	border-color: #D4D1CD;
+	border-width: 0 0 0 1px;
+}
+
+.tweets a.more-tweets:link,
+.tweets a.more-tweets:visited {
+	color: #262626;
+	padding: 12px 22px;
+	background: #D4D1CD;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-family: 'Julius Sans One', 'Open Sans', sans-serif;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.tweets a.more-tweets:hover,
+.tweets a.more-tweets:active {
+	color: #EDEDED;
+	background: #464644;
+}
+
+.section a:link,
+.section a:visited {
+	color: #0092C7;
+}
+
+.tweet {
+	margin: 0 0.5em 1.5em;
+}
+
+.tweets .tweet a.read-more:link,
+.tweets .tweet a.read-more:visited {
+	color: #333;
+}
+
+.toggle-submenu-wrapper {
+	display: none!important;
+}
+
+@media (max-width: 1199px) {
+	.navbar > .container .navbar-brand {
+		margin-left: 0;
+		width: 220px;
+	}
+
+	.feature {
+		padding-right: 20px;
+		margin-bottom: 1px;
+	}
+
+	.feature span {
+		padding-left: 80px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.feature {
+		padding: 0 10px;
+	}
+
+	.feature-img {
+		height: 55px;
+		width: 55px;
+		top: 22px;
+	}
+
+	.feature span {
+		padding-left: 65px;
+	}
+}
+
+@media (max-width: 991px) {
+	.feature + .feature {
+		border: 0;
+	}
+
+	.tweets {
+		margin-top: 2em;
+	}
+
+	.news h2 {
+		text-align: center;
+	}
+
+	.tweet {
+		margin: 0 0 1em;
+	}
+	.tweets div {
+		min-height: unset;
+	}
+
+	.tweets div + div {
+		border-left-width: 0;
+		border-top-width: 1px;
+		padding-top: 1em;
+	}
+
+	footer .twitter {
+		margin-bottom: 2em;
+	}
+}
+
+@media (max-width: 767px) {
+	.banner {
+		display: none;
+	}
+
+	.features {
+		margin-top: 0;
+	}
+}
