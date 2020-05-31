@@ -219,8 +219,10 @@ function display_tweets($template = '')
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
 
 
-    foreach ($json as $tweet) {
-
+    foreach ($json as $i => $tweet) {
+		if ($i > 2) {
+			break;
+		}
         echo build_tweet($tweet, $template);
     }
 }

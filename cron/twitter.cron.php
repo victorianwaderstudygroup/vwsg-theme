@@ -19,7 +19,7 @@ $ch = curl_init(
         'statuses/user_timeline.json',
         http_build_query([
             'screen_name' => TWITTER_USER,
-            'count' => 3,
+            'count' => 10,
             'exclude_replies' => true,
 //            'include_rts' => false,
             'trim_user' => true,
