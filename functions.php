@@ -156,7 +156,7 @@ TWITTER;
         }
         $text = str_replace(
             '@' . $user_mention['screen_name'],
-            sprintf('<a href="%s">@%s</a>',
+            sprintf('<a href="%s" target="_blank">@%s</a>',
                 'https://twitter.com/' . $user_mention['screen_name'],
                 $user_mention['screen_name']
             ),
