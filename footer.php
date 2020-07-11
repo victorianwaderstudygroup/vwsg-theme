@@ -26,7 +26,7 @@
                         <?php endif; ?>
                             <div>
                     <?php
-                        endif ?><a data-fancybox="footer-gallery" href="<?=wp_get_attachment_url(get_the_ID()) ?>"><img src="<?=wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title()?>"></a>
+                        endif ?><a data-fancybox="footer-gallery" href="<?=wp_get_attachment_url(get_the_ID()) ?>" data-caption="<?=wp_get_attachment_caption(get_the_ID());?>"><img src="<?=wp_get_attachment_image_src(get_the_ID(), 'thumbnail')[0]; ?>" alt="<?php the_title()?>"></a>
                     <?php
                         $i++;
                     endforeach;
@@ -56,7 +56,8 @@
             ?>
             </div>
             <div class="col-xs-12 copyright">
-                <p>&copy; Copyright <?=date('Y');?> VWSG. Website maintained by Birgita Hansen. Page last updated: <?=get_the_date('F d, Y')?></p>
+
+                <p>&copy; Copyright <?=date('Y');?> VWSG. Website maintained by <?=get_userdata(1)->data->display_name; ?>. Page last updated: <?=get_the_modified_date('F d, Y')?></p>
             </div>
         </div>
     </footer>
