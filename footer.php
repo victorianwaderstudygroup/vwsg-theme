@@ -56,7 +56,7 @@
             ?>
             </div>
             <div class="col-xs-12 copyright">
-                <p>&copy; Copyright <?=date('Y');?> VWSG. Website maintained by Birgita Hansen. Page last updated: <?=get_the_date('F d, Y')?></p>
+                <p>&copy; Copyright <?=date('Y');?> VWSG. Website maintained by Birgita Hansen. Page last updated: <?=get_the_modified_date('F d, Y')?></p>
             </div>
         </div>
     </footer>
