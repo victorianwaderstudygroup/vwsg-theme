@@ -6,10 +6,9 @@
  * Time: 4:37 PM
  */
 
-
-define('TWITTER_BEARER_TOKEN', 'AAAAAAAAAAAAAAAAAAAAAAEe9gAAAAAAyXXvW1LhcVRB1fCvIAUzExbDfAA%3DhQCppugfuFBDr0qgGsgK6GTPgVYI8uR2DTs3MITOcMRXVONTlT');
-define('TWITTER_USER', 'vwsg_web');
-define('TWITTER_API_URL', 'https://api.twitter.com/1.1/');
+const TWITTER_BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAAEe9gAAAAAAyXXvW1LhcVRB1fCvIAUzExbDfAA%3DhQCppugfuFBDr0qgGsgK6GTPgVYI8uR2DTs3MITOcMRXVONTlT';
+const TWITTER_USER = 'vwsg_web';
+const TWITTER_API_URL = 'https://api.twitter.com/1.1/';
 
 
 $ch = curl_init(

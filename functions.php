@@ -90,7 +90,7 @@ function add_tags_for_attachments()
 add_action('init', 'add_tags_for_attachments');
 
 
-function wpdocs_excerpt_more()
+function wpdocs_excerpt_more(): string
 {
     return '...';
 }
@@ -103,7 +103,7 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  * In the context of this theme, is it news
  * @return bool
  */
-function is_news()
+function is_news(): bool
 {
     return is_single() || is_home() || is_archive();
 }
@@ -120,7 +120,7 @@ function get_breadcrumb()
 /**
  * Utility function to retrieve News & Events page
  *
- * @return array|WP_Post|null
+ * @return WP_Post|array|null
  */
 function get_news_page()
 {
@@ -128,7 +128,7 @@ function get_news_page()
 }
 
 
-function build_tweet($tweet, $user_template)
+function build_tweet($tweet, $user_template): string
 {
     $twitter_user = 'vwsg_web';
 
@@ -386,7 +386,7 @@ function get_child_pages($parent_post) {
 
 class Breadcrumb_Walker extends Walker_Nav_Menu
 {
-    protected function get_direct_ancestors($elements)
+    protected function get_direct_ancestors($elements): array
     {
         $currentID = get_the_ID();
         $ancestors = [];
@@ -407,7 +407,7 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         return $ancestors;
     }
 
-    protected function exclude_top_level_items($elements)
+    protected function exclude_top_level_items($elements): array
     {
         return array_filter($elements, function ($item) {
             // Top level items have no parent (post_parent=0) everything else will have a post_parent>0
@@ -416,14 +416,13 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         });
     }
 
-    function walk($elements, $max_depth, ...$args)
+    function walk($elements, $max_depth, ...$args): string
     {
         $elements = $this->get_direct_ancestors($elements);
         //$elements = $this->exclude_top_level_items($elements);
         $output = parent::walk($elements, $max_depth, $args);
 
-        $output = '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
-        return $output;
+        return '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
     }
 
     public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)

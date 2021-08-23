@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> lang="en">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
     <div class="container">
 		<div class="navbar-header">
             <a class="navbar-brand" href="<?= site_url(); ?>">
-                <img class="navbar-logo" src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="<?= bloginfo('site_title') ?>">
+                <img class="navbar-logo" src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="<?php bloginfo('site_title'); ?>">
 				Victorian Wader Study Group
             </a>
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-menu" aria-expanded="false" aria-controls="navbar">

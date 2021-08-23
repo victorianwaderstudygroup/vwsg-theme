@@ -13,7 +13,7 @@ get_header();
 
 ?>
 	<div class="row">
-		<img class="banner" src="<?=get_template_directory_uri()?>/images/home-banner-1.jpg">
+		<img class="banner" src="<?=get_template_directory_uri()?>/images/home-banner-1.jpg" role="presentation">
 	</div>
 
 	<div class="row features">
@@ -28,9 +28,9 @@ get_header();
 			'order' => 'ASC'
 		];
 		foreach (get_posts($args) as $post) : setup_postdata($post); ?>
-			<a class="col-xs-12 col-sm-4 feature" href="<?=the_permalink()?>">
+			<a class="col-xs-12 col-sm-4 feature" href="<?php the_permalink(); ?>">
 				<?php if (has_post_thumbnail()) : ?>
-					<img src="<?=the_post_thumbnail_url('75');?>" class="feature-img">
+					<img src="<?php the_post_thumbnail_url('75'); ?>" class="feature-img" role="presentation">
 				<?php
 				endif;
 				?>
@@ -86,9 +86,9 @@ get_header();
 	<div class="row">
 		<div class="col-xs-12 tweets section">
 			<h2><i class="fab fa-twitter"></i> Tweets</h2>
-			<?=display_tweets('<div class="col-xs-12 col-md-4">%s</div>')?>
+			<?php display_tweets('<div class="col-xs-12 col-md-4">%s</div>'); ?>
 
-			<a class="more-tweets" href="http://twitter.com/vwsg_web">More tweets <i class="fab fa-twitter"></i></a>
+			<a class="more-tweets" href="https://twitter.com/vwsg_web">More tweets <i class="fab fa-twitter"></i></a>
 		</div>
 	</div>
 <?php
