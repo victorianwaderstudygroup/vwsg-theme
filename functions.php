@@ -3,12 +3,12 @@
 // Enqueue stylesheets
 function vwsg_styles()
 {
-    wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+    wp_enqueue_style('fontawesome', get_template_directory_uri() . '/lib/fontawesome/5.15.4/css/all.css', [], '5.15.4');
     wp_enqueue_style('fonts', 'https://fonts.googleapis.com/css?family=Julius+Sans+One|Open+Sans:300,400,700', []);
-    wp_enqueue_style('bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', [], '3.3.7');
-    wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', [], '3.5.7');
+    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/lib/bootstrap/3.4.1/css/bootstrap.min.css', [], '3.4.1');
+    wp_enqueue_style('fancybox-css', get_template_directory_uri() . '/lib/fancybox/3.5.7/jquery.fancybox.min.css', [], '3.5.7');
 
-    wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.0.0');
+    wp_enqueue_style('vwsg-style', get_stylesheet_uri(), ['bootstrap-css', 'fonts', 'fontawesome'], '1.0.2');
 
     if (is_front_page()) {
         wp_enqueue_style('vwsg-front-page-style', get_template_directory_uri() . '/css/front-page.css', ['vwsg-style'], '1.0.0');
@@ -30,9 +30,9 @@ add_action('wp_enqueue_scripts', 'vwsg_styles');
 function vwsg_scripts()
 {
     wp_deregister_script('jquery');
-    wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', [], '3.3.1');
-    wp_enqueue_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', [], '3.3.1');
-    wp_enqueue_script('fancybox', 'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', [], '3.5.7');
+    wp_enqueue_script('jquery', get_template_directory_uri() . '/lib/jquery/3.6.0/jquery.min.js', [], '3.6.0');
+    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/lib/bootstrap/3.4.1/js/bootstrap.min.js', [], '3.4.1');
+    wp_enqueue_script('fancybox', get_template_directory_uri() . '/lib/fancybox/3.5.7/jquery.fancybox.min.js', [], '3.5.7');
     wp_enqueue_script('vwsg-search-script', get_template_directory_uri() . '/js/search.js', ['jquery'], '1.0.0');
     wp_enqueue_script('vwsg-template-script', get_template_directory_uri() . '/js/functions.js', ['jquery'], '1.0.0');
 }
@@ -90,7 +90,7 @@ function add_tags_for_attachments()
 add_action('init', 'add_tags_for_attachments');
 
 
-function wpdocs_excerpt_more()
+function wpdocs_excerpt_more(): string
 {
     return '...';
 }
@@ -103,7 +103,7 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  * In the context of this theme, is it news
  * @return bool
  */
-function is_news()
+function is_news(): bool
 {
     return is_single() || is_home() || is_archive();
 }
@@ -120,7 +120,7 @@ function get_breadcrumb()
 /**
  * Utility function to retrieve News & Events page
  *
- * @return array|WP_Post|null
+ * @return WP_Post|array|null
  */
 function get_news_page()
 {
@@ -128,7 +128,7 @@ function get_news_page()
 }
 
 
-function build_tweet($tweet, $user_template)
+function build_tweet($tweet, $user_template): string
 {
     $twitter_user = 'vwsg_web';
 
@@ -386,7 +386,7 @@ function get_child_pages($parent_post) {
 
 class Breadcrumb_Walker extends Walker_Nav_Menu
 {
-    protected function get_direct_ancestors($elements)
+    protected function get_direct_ancestors($elements): array
     {
         $currentID = get_the_ID();
         $ancestors = [];
@@ -407,7 +407,7 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         return $ancestors;
     }
 
-    protected function exclude_top_level_items($elements)
+    protected function exclude_top_level_items($elements): array
     {
         return array_filter($elements, function ($item) {
             // Top level items have no parent (post_parent=0) everything else will have a post_parent>0
@@ -416,14 +416,13 @@ class Breadcrumb_Walker extends Walker_Nav_Menu
         });
     }
 
-    function walk($elements, $max_depth, ...$args)
+    function walk($elements, $max_depth, ...$args): string
     {
         $elements = $this->get_direct_ancestors($elements);
         //$elements = $this->exclude_top_level_items($elements);
         $output = parent::walk($elements, $max_depth, $args);
 
-        $output = '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
-        return $output;
+        return '<a href="' . site_url() . '" title="' . get_bloginfo('title') . '">Home</a>' . $output;
     }
 
     public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)

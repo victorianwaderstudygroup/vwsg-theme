@@ -3,7 +3,7 @@
     <footer>
         <div class="container">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-3 col-md-offset-0 twitter">
-                <?=display_tweet()?>
+                <?php display_tweet(); ?>
                 <p class="handle">
                     <a href="//twitter.com/vwsg_web">vwsg_web</a>
                 </p>

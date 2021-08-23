@@ -45,6 +45,7 @@ get_header();
                     while (have_posts()) : the_post(); ?>
 
                         <?php
+
                         switch (get_post_type()) {
                             case 'attachment':
                                 switch (get_post_mime_type()) {
@@ -63,11 +64,13 @@ get_header();
                                 $type = 'news';
                                 break;
                         }
+
+                        $type = isset($type) ? 'type-'.$type : '';
                         ?>
 
                         <div class="search_result type-<?=$type?>">
                             <?php
-                            if ($icon):
+                            if (isset($icon) && !empty($icon)):
                                 ?>
                                 <i class="<?= $icon ?>"></i>
                             <?php

@@ -61,8 +61,8 @@ if (count($child_pages)) {
             foreach ($pages as $page) {
 				$classes = array();
 				$target = '';
-				$previous_id = isset($previous_id) ? $previous_id : 0;
-				$parent_id = isset($parent_id) ? $parent_id : 0;
+				$previous_id = $previous_id ?? 0;
+				$parent_id = $parent_id ?? 0;
 				$title = $page->post_title;
 
             	if ($page->ID === get_the_ID()) {
