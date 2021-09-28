@@ -450,6 +450,10 @@ p.callout a:active {
 	color: #FFF;
 }
 
+.wp-block-image img {
+	height: auto;
+}
+
 @media (max-width: 1199px) {
 
 	.sidebar {
