@@ -254,6 +254,10 @@ a.tile:visited {
 	display: block;
 }
 
+.subpage-listing {
+	overflow: auto;
+}
+
 p + .subpage-listing {
 	margin-top: 4em;
 }
