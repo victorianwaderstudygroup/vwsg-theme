@@ -8,7 +8,7 @@
 
 $meta = get_post_meta(get_the_id());
 
-if ($meta['redirect'][0]) {
+if (array_key_exists('redirect', $meta) && $meta['redirect'][0]) {
     header('Location: '.$meta['redirect'][0]);
     exit;
 }

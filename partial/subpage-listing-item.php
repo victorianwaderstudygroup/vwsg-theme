@@ -29,7 +29,7 @@
     <a class="thumbnail" href="<?=$url?>" target="<?=$target?>" <?=$bg_image?>>
         <?=$url ? '<div class="img-overlay"></div>':''; ?>
         <span class="title">
-            <?=$meta['short_title'][0] ?: the_title() ?>
+            <?=$meta['short_title'][0] ?? the_title() ?>
         </span>
 
         <?php /*$content = get_the_content();
