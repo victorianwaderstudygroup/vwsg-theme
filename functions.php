@@ -233,8 +233,8 @@ function list_news($attrs)
         'category' => 'News'
     ], $attrs);
 
-	$page = get_query_var('paged');
-	$page = $page == 0 ? 1 : $page;
+	$page = filter_var(get_query_var('paged'), FILTER_VALIDATE_INT);
+	$page = empty($page) ? 1 : $page;
 	$per_page = 10;
 
     $news_args = [
