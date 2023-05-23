@@ -200,20 +200,24 @@ TWITTER;
 function display_tweet($template = '')
 {
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
-    $tweet = $json[0];
+    if (!array_key_exists('errors', $json)) {
+        $tweet = $json[0];
 
-    echo build_tweet($tweet, $template);
+        echo build_tweet($tweet, $template);
+    }
 }
 
 function display_tweets($template = '')
 {
     $json = json_decode(file_get_contents(get_template_directory() . '/cron/vwsg_web.json'), JSON_OBJECT_AS_ARRAY);
 
-    foreach ($json as $i => $tweet) {
-        if ($i > 2) {
-            break;
-        }
-        echo build_tweet($tweet, $template);
+    if (!array_key_exists('errors', $json)) {
+	foreach ($json as $i => $tweet) {
+	    if ($i > 2) {
+		break;
+	    }
+	    echo build_tweet($tweet, $template);
+	}
     }
 }
 
