@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1198268-73"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6D0QPMHHPB"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
 
-		gtag('config', 'UA-1198268-73');
+		gtag('config', 'G-6D0QPMHHPB');
 	</script>
 
 
