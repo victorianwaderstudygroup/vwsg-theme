@@ -83,13 +83,6 @@ get_header();
 			<a class="more-news" href="/news-events">More news &rarr;</i></a>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 tweets section">
-			<h2><i class="fab fa-twitter"></i> Tweets</h2>
-			<?php display_tweets('<div class="col-xs-12 col-md-4">%s</div>'); ?>
 
-			<a class="more-tweets" href="https://twitter.com/vwsg_web">More tweets <i class="fab fa-twitter"></i></a>
-		</div>
-	</div>
 <?php
 get_footer();

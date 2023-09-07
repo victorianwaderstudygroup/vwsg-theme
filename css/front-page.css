@@ -171,53 +171,10 @@
 	background: #464644;
 }
 
-.tweets {
-	padding-bottom: 4em;
-}
-
-.tweets div {
-	min-height: 190px;
-}
-
-.tweets div + div {
-	border-style: solid;
-	border-color: #D4D1CD;
-	border-width: 0 0 0 1px;
-}
-
-.tweets a.more-tweets:link,
-.tweets a.more-tweets:visited {
-	color: #262626;
-	padding: 12px 22px;
-	background: #D4D1CD;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	font-family: 'Julius Sans One', 'Open Sans', sans-serif;
-	display: block;
-	text-decoration: none;
-	text-align: center;
-}
-
-.tweets a.more-tweets:hover,
-.tweets a.more-tweets:active {
-	color: #EDEDED;
-	background: #464644;
-}
 
 .section a:link,
 .section a:visited {
 	color: #0092C7;
-}
-
-.tweet {
-	margin: 0 0.5em 1.5em;
-}
-
-.tweets .tweet a.read-more:link,
-.tweets .tweet a.read-more:visited {
-	color: #333;
 }
 
 .toggle-submenu-wrapper {
@@ -261,29 +218,8 @@
 		border: 0;
 	}
 
-	.tweets {
-		margin-top: 2em;
-	}
-
 	.news h2 {
 		text-align: center;
-	}
-
-	.tweet {
-		margin: 0 0 1em;
-	}
-	.tweets div {
-		min-height: unset;
-	}
-
-	.tweets div + div {
-		border-left-width: 0;
-		border-top-width: 1px;
-		padding-top: 1em;
-	}
-
-	footer .twitter {
-		margin-bottom: 2em;
 	}
 }
 
