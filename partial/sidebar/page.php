@@ -38,7 +38,8 @@ if (count($child_pages)) {
 
             $query = new WP_Query([
                 'category_name' => 'fieldwork',
-                'post_type' => 'page'
+                'post_type' => 'page',
+		'nopaging' => true
             ]);
 
             $exclude = implode(',', array_column($query->posts, 'ID'));
@@ -47,7 +48,8 @@ if (count($child_pages)) {
             $pages = new WP_Query([
 				'child_of' => $parent_post->ID,
 				'exclude' => $exclude,
-				'sort_column' => 'menu_order'
+				'sort_column' => 'menu_order',
+				'nopaging' => true
 			]);
 
 
