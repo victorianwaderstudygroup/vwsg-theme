@@ -199,7 +199,8 @@ function list_subpages($attrs)
     $subpage_args = [
         'post_type' => 'page',
         'post_parent' => $parent_id,
-        'orderby' => ['menu_order', 'post_title']
+        'orderby' => ['menu_order', 'post_title'],
+	'nopaging' => true
     ];
 
     ob_start();
@@ -230,7 +231,8 @@ function list_fieldwork()
     $fieldwork_args = [
         'post_type' => 'page',
         'category_name' => 'Fieldwork',
-        'orderby' => 'name'
+        'orderby' => 'name',
+	'nopaging' => true
     ];
 
     ob_start();
